@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import LoadingReducer from '../../../redux/reducers/LoadingReducer'
 import styleLoading from './LoadingComponent.module.css'
+import loading from '../../../assets/imgLoading/loading.gif'
 
 
 export default function LoadingComponent(props) {
@@ -12,7 +13,7 @@ export default function LoadingComponent(props) {
     return (
 
       <div className={styleLoading.bgLoading}>
-        <img src={require('../../../assets/imgLoading/loading.gif')}></img>
+        <img src={loading}></img>
       </div>
     )
     }else{

@@ -53,7 +53,7 @@ function * signinSaga(action) {
     // //lấy giá trị về từ reducer
     // let history = yield select(state => state.HistoryReducer.history);
 
-    history.push('/home');
+    history.push('/createBrowserHistory');
 
 
   }catch(err) {

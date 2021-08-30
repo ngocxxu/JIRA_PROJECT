@@ -23,6 +23,8 @@ import { JiraTemplate } from "./templates/JiraTemplate";
 import indexJira from "./redux/sagas/Jira/indexJira";
 import './index.css'
 import CreateProject from "./pages/Jira/CreateProject/CreateProject";
+import ProjectManagement from "./pages/Jira/ProjectManagement/ProjectManagement";
+import ModalJira from "./HOC/JiraHOC/DrawerJira";
 
 
 
@@ -53,6 +55,7 @@ function App() {
 
       {/* chèn trang loading cho website */}
       <LoadingComponent></LoadingComponent>
+      <ModalJira></ModalJira>
 
       {/* Switch dùng để khi page dc tìm thấy nó sẽ Break, giống cơ chế Switch Case */}
       <Switch>
@@ -69,6 +72,7 @@ function App() {
 
         <JiraTemplate exact path="/jira" component={indexJira}></JiraTemplate>
         <JiraTemplate exact path="/createproject" component={CreateProject}></JiraTemplate>
+        <JiraTemplate exact path="/projectmanagement" component={ProjectManagement}></JiraTemplate>
 
         {/* tránh người dùng gõ bậy bạ trên URL, khi URL ko hợp lý thì sẽ trả về trang PageNotFound */}
         <HomeTemplate path="*" component={PageNotFound}></HomeTemplate>

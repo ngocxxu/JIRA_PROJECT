@@ -7,6 +7,9 @@ import LoadingReducer from "./reducers/LoadingReducer";
 import {HistoryReducer} from "./reducers/HistoryReducer";
 import {UserJiraReducer} from "./reducers/UserJiraReducer";
 import {ProjectCategoryReducer} from "./reducers/ProjectCategoryReducer";
+import {ProjectJiraReducer} from "./reducers/ProjectJiraReducer";
+import { DrawerJiraReducer } from "./reducers/DrawerJiraReducer";
+import { ProjectReducer } from "./reducers/ProjectReducer";
 
 
 const middleWareSaga = createMiddleWareSaga();
@@ -19,6 +22,9 @@ const rootReducer = combineReducers({
   HistoryReducer,
   UserJiraReducer,
   ProjectCategoryReducer,
+  ProjectJiraReducer,
+  DrawerJiraReducer,
+  ProjectReducer,
 });
 
 const store = createStore(

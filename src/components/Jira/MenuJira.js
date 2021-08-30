@@ -21,6 +21,10 @@ export default function MenuJira() {
         </div>
         <div>
           <i className="fa fa-cog" />
+          <NavLink className="text-dark" to='/projectmanagement' activeClassName = 'active font-weight-bold' font-weight-bold>Project Management</NavLink>
+        </div>
+        <div>
+          <i className="fa fa-cog" />
           <NavLink className="text-dark" to='/createproject' activeClassName = 'active font-weight-bold' font-weight-bold>Create Project</NavLink>
         </div>
       </div>

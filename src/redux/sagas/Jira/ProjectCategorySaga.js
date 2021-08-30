@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { jiraService } from "../../../services/JiraService";
 import { STATUS_CODE } from "../../../util/constants/settingSystem";
-import { GET_ALL_PROJECT_CATEGORY_SAGA } from "../../constants/Jira/JiraConst";
+import { GET_ALL_PROJECT_CATEGORY, GET_ALL_PROJECT_CATEGORY_SAGA } from "../../constants/Jira/JiraConst";
 
 //action nhận vào từ GET_ALL_PROJECT_CATEGORY_SAGA để thực hiện hàm bên dưới
 function* getAllProjectCategorySaga(action) {
@@ -16,7 +16,7 @@ function* getAllProjectCategorySaga(action) {
     if (status === STATUS_CODE.SUCCESS) {
       //gọi api thành công thì dispatch action 1 lên reducer thông qua put của saga
       yield put({
-        type: "GET_ALL_PROJECT_CATEGORY",
+        type: GET_ALL_PROJECT_CATEGORY,
         data: data.content,
       });
     }else{

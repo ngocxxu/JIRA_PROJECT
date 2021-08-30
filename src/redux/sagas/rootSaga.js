@@ -8,6 +8,7 @@ import * as ToDoListSaga from './ToDoListSagaSaga'
 
 import * as Jira from './Jira/UserJiraSaga'
 import * as ProjectCategorySaga from './Jira/ProjectCategorySaga'
+import * as ProjectSaga from './Jira/ProjectSaga'
 
 export function* rootSaga() {
   //nhận vào mảng với các nghiệp vụ mà nó theo dõi
@@ -21,6 +22,10 @@ export function* rootSaga() {
 
     Jira.theoDoiSignin(),
     ProjectCategorySaga.theoDoiGetAllProjectCategory(),
+    ProjectSaga.theoDoiCreateProjectSaga(),
+    ProjectSaga.theoDoiGetListProjectSaga(),
+    ProjectSaga.theoDoiUpdateProjectSaga(),
+
 
 
 
