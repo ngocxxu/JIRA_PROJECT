@@ -44,7 +44,8 @@ export const jiraService = {
       data: projectUpdate, //gửi data len server api xử lý
       headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}, //bearer là của lib JWT dùng để render ra các token
     })
-  }
+  },
+  
 };
 
 
