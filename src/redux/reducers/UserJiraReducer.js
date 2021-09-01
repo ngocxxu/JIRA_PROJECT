@@ -1,5 +1,6 @@
 import { USER_LOGIN } from "../../util/constants/settingSystem";
 import { USLOGIN } from "../constants/Jira/JiraConst";
+import { GET_USER_BY_PROJECT } from "../constants/Jira/UserConst";
 
 
 //đặt biến usLogin chứa 1 obj
@@ -13,7 +14,9 @@ if(localStorage.getItem(USER_LOGIN)){
 const stateDefault = {
 
   //sau khi xog các bước code trên, ta gán usLogin là giá trị mặc định của state
-  userLogin : usLogin
+  userLogin : usLogin,
+  userSearch: [], //mảng này dc fileter lại
+  arrUser: [], //mảng này dc fileter lại
 
 }
 
@@ -22,6 +25,16 @@ export const UserJiraReducer = (state = stateDefault, action) => {
   switch(action.type) {
     case USLOGIN:{
       state.userLogin = action.userLogin;
+      return { ...state};
+    }
+
+    case 'GET_USER_SEARCH':{
+      state.userSearch = action.listUsersSearch;
+      return { ...state};
+    }
+
+    case GET_USER_BY_PROJECT:{
+      state.arrUser = action.arrUser;
       return { ...state};
     }
 

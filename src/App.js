@@ -20,7 +20,7 @@ import './App.css';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch } from "react-redux";
 import { JiraTemplate } from "./templates/JiraTemplate";
-import indexJira from "./redux/sagas/Jira/indexJira";
+import IndexJira from "./redux/sagas/Jira/IndexJira";
 import './index.css'
 import CreateProject from "./pages/Jira/CreateProject/CreateProject";
 import ProjectManagement from "./pages/Jira/ProjectManagement/ProjectManagement";
@@ -70,14 +70,14 @@ function App() {
         {/* <HomeTemplate exact path="/todolistsaga" component={ToDoListSaga}></HomeTemplate> */}
         <HomeTemplate exact path="/detail/:id" component={Detail}></HomeTemplate>
 
-        <JiraTemplate exact path="/jira" component={indexJira}></JiraTemplate>
+        <JiraTemplate exact path="/jira" component={IndexJira}></JiraTemplate>
         <JiraTemplate exact path="/createproject" component={CreateProject}></JiraTemplate>
         <JiraTemplate exact path="/projectmanagement" component={ProjectManagement}></JiraTemplate>
-
+        <JiraTemplate exact path="/projectdetail/:projectId" component={IndexJira}></JiraTemplate>
+        <JiraTemplate exact path="/" component={ProjectManagement}></JiraTemplate>
         {/* tránh người dùng gõ bậy bạ trên URL, khi URL ko hợp lý thì sẽ trả về trang PageNotFound */}
         <HomeTemplate path="*" component={PageNotFound}></HomeTemplate>
 
-        <HomeTemplate exact path="/" component={Home}></HomeTemplate>
       </Switch>
     </>
   );

@@ -28,6 +28,7 @@ export class BaseService{
   get = (url, id, model) => {
     return Axios({
       url: `${DOMAIN_JIRA}/${url}`,
+      data:model,
       method: "GET",
       headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}, //bearer là của lib JWT dùng để render ra các token
     })
@@ -38,6 +39,7 @@ export class BaseService{
     return Axios({
       url: `${DOMAIN_JIRA}/${url}`,
       method: "DELETE",
+      data:model,
       headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}, //bearer là của lib JWT dùng để render ra các token
     })
   }

@@ -20,6 +20,10 @@ export class UserService extends BaseService {
     return this.post(`Project/removeUserFromProject`,userProject);
 
   };
+
+  getUserByProjectId = (idProject) => {
+    return this.get(`Users/getUserByProjectId?idProject=${idProject}`)
+  }
 }
 
 //tạo đối tượng projectService để chứa các phương thức trên

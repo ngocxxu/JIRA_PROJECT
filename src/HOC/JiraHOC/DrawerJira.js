@@ -16,7 +16,7 @@ import { CLOSE_DRAWER, OPEN_DRAWER } from "../../redux/constants/Jira/DrawerCons
 
 export default function ModalJira(props) {
 
-  const {visible,ComponentContentDrawer,callBackSubmit} = useSelector(state => state.DrawerJiraReducer);
+  const {visible,ComponentContentDrawer,callBackSubmit, title} = useSelector(state => state.DrawerJiraReducer);
 
   const dispatch = useDispatch();
 
@@ -37,7 +37,7 @@ export default function ModalJira(props) {
   return (
     <>
       <Drawer
-        title="Create a new account"
+        title={title}
         width={720}
         onClose={onClose}
         visible={visible}

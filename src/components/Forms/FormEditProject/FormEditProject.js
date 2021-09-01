@@ -160,9 +160,6 @@ const editProjectForm = withFormik({
       type: 'UPDATE_PROJECT_SAGA',
       projectUpdate: values, //values này ứng với những giá trị mới mà ta đã thay đổi, gửi lên saga, saga xử lý sang api, gửi value lên api xử lý
     });
-
-    
-
     
   },
   //displayName dùng để phân biệt các formik với nhau

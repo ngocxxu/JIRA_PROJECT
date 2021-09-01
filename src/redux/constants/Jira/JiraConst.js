@@ -19,7 +19,13 @@ export const CREATE_PROJECT_SAGA = 'CREATE_PROJECT_SAGA';
 
 
 
-//---get all projects từ API
+//---get list projects từ API
 export const GET_LIST_PROJECT_SAGA = 'GET_LIST_PROJECT_SAGA';
 export const GET_LIST_PROJECT = 'GET_LIST_PROJECT';
+
+
+
+//---get all projects từ API
+export const GET_ALL_PROJECT_SAGA = 'GET_ALL_PROJECT_SAGA';
+export const GET_ALL_PROJECT = 'GET_ALL_PROJECT';
 

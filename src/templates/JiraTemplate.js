@@ -7,7 +7,7 @@ import InfoMainJira from "../components/Jira/Main/InfoMainJira";
 import MenuJira from "../components/Jira/MenuJira";
 import ModalJira from "../components/Jira/ModalJira/ModalJira";
 import SidebarJira from "../components/Jira/SidebarJira";
-import indexJira from "../redux/sagas/Jira/indexJira";
+import IndexJira from "../redux/sagas/Jira/IndexJira";
 // import '../index.css'
 
 export const JiraTemplate = (props) => {
