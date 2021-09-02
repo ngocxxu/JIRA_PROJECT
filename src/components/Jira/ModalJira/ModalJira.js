@@ -8,6 +8,7 @@ import {
   UPDATE_STATUS_TASK_SAGA,
 } from "../../../redux/constants/Jira/TaskTypeConstant";
 import { GET_ALL_PRIORITY_SAGA } from "../../../redux/constants/Jira/PriorityConst";
+import { Editor } from "@tinymce/tinymce-react";
 
 export default function ModalJira(props) {
   const dispatch = useDispatch();
@@ -15,6 +16,10 @@ export default function ModalJira(props) {
   const { arrStatus } = useSelector((state) => state.StatusReducer);
   const { arrPriority } = useSelector((state) => state.PriorityReducer);
   const { arrTaskType } = useSelector((state) => state.TaskTypeReducer);
+
+  const [visibleEditor, setVisibleEditor] = useState(false);
+  const [historyContent, setHistoryContent] = useState(taskDetailModal.description);
+  const [content, setContent] = useState(taskDetailModal.description);
 
   useEffect(() => {
     dispatch({
@@ -32,7 +37,6 @@ export default function ModalJira(props) {
     const { timeTrackingSpent, timeTrackingRemaining } = taskDetailModal;
     const max = Number(timeTrackingSpent) + Number(timeTrackingRemaining);
     const percent = Math.round((Number(timeTrackingSpent) / max) * 100);
-
     return (
       <div>
         <div style={{ display: "flex" }}>
@@ -90,6 +94,63 @@ export default function ModalJira(props) {
     });
   };
 
+  const renderDescription = () => {
+    const jsxDescription = ReactHtmlParser(taskDetailModal.description);
+    return (
+      <div>
+        {visibleEditor ? (
+          <div>
+            <Editor
+              name="description"
+              initialValue={taskDetailModal.description}
+              init={{
+                height: 500,
+                menubar: false,
+                plugins: [
+                  "advlist autolink lists link image charmap print preview anchor",
+                  "searchreplace visualblocks code fullscreen",
+                  "insertdatetime media table paste code help wordcount",
+                ],
+                toolbar:
+                  "undo redo | formatselect | " +
+                  "bold italic backcolor | alignleft aligncenter " +
+                  "alignright alignjustify | bullist numlist outdent indent | " +
+                  "removeformat | help",
+                content_style:
+                  "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+              }}
+              onEditorChange={(content, editor) => {
+                // setFieldValue("description", content);
+                setContent(content);
+              }}
+            />
+            <button className="btn btn-primary m-2" onClick={()=>{
+
+              dispatch({
+                type: CHANGE_TASK_MODAL,
+                name: 'description',
+                value: content, //content này của useState
+              })
+
+              setVisibleEditor(false)
+            }}>Save</button>
+            <button className="btn btn-danger m-2" onClick={() =>{
+              setVisibleEditor(false)
+            }}>Cancel</button>
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              setVisibleEditor(true);
+            }}
+          >
+            {jsxDescription}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div
       className="modal fade"
@@ -104,9 +165,17 @@ export default function ModalJira(props) {
           <div className="modal-header">
             <div className="task-title">
               <i className="fa fa-bookmark" />
-              <select name = 'typeId' value={taskDetailModal.typeId} onChange={handleChange}>
-                {arrTaskType.map((task,index) => {
-                  return <option key={index} value={task.id}>{task.taskType}</option>
+              <select
+                name="typeId"
+                value={taskDetailModal.typeId}
+                onChange={handleChange}
+              >
+                {arrTaskType.map((task, index) => {
+                  return (
+                    <option key={index} value={task.id}>
+                      {task.taskType}
+                    </option>
+                  );
                 })}
               </select>
               <span>{taskDetailModal.taskName}</span>
@@ -138,7 +207,7 @@ export default function ModalJira(props) {
                   <p className="issue">This is an issue of type: Task.</p>
                   <div className="description">
                     <p>Description</p>
-                    {ReactHtmlParser(taskDetailModal.description)}
+                    {renderDescription()}
                   </div>
                   <div style={{ fontWeight: 500, marginBottom: 10 }}>
                     Jira Software (software projects) issue types:
