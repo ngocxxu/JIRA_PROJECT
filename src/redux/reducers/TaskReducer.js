@@ -18,22 +18,7 @@ const initialState = {
         alias: "hung",
       },
     ],
-    lstComment: [
-      {
-        id: 569,
-        idUser: 305,
-        name: "Hung",
-        avatar: "https://ui-avatars.com/api/?name=Hung",
-        commentContent: "hung cmt",
-      },
-      {
-        id: 570,
-        idUser: 305,
-        name: "Hung",
-        avatar: "https://ui-avatars.com/api/?name=Hung",
-        commentContent: "hung cmt 2",
-      },
-    ],
+    lstComment: [],
     taskId: 925,
     taskName: "backlog 2",
     alias: "backlog-2",

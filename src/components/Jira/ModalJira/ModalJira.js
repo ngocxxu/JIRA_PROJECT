@@ -6,6 +6,7 @@ import {
   CHANGE_TASK_MODAL,
   GET_ALL_TASK_TYPE_SAGA,
   GET_STATUS_SAGA,
+  HANDLE_CHANGE_POST_API_SAGA,
   REMOVE_USER_ASSIGN,
   UPDATE_STATUS_TASK_SAGA,
 } from "../../../redux/constants/Jira/TaskTypeConstant";
@@ -95,11 +96,19 @@ export default function ModalJira(props) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     dispatch({
-      type: CHANGE_TASK_MODAL,
+      type: HANDLE_CHANGE_POST_API_SAGA,
+      actionType: CHANGE_TASK_MODAL,
       name: name,
       value: value,
-    });
+    })
+
+    // dispatch({
+    //   type: CHANGE_TASK_MODAL,
+    //   name: name,
+    //   value: value,
+    // });
   };
 
   const renderDescription = () => {
@@ -135,11 +144,19 @@ export default function ModalJira(props) {
             <button
               className="btn btn-primary m-2"
               onClick={() => {
+
                 dispatch({
-                  type: CHANGE_TASK_MODAL,
+                  type: HANDLE_CHANGE_POST_API_SAGA,
+                  actionType: CHANGE_TASK_MODAL,
                   name: "description",
-                  value: content, //content này của useState
-                });
+                  value: content,
+                })
+
+                // dispatch({
+                //   type: CHANGE_TASK_MODAL,
+                //   name: "description",
+                //   value: content, //content này của useState
+                // });
 
                 setVisibleEditor(false);
               }}
@@ -149,6 +166,14 @@ export default function ModalJira(props) {
             <button
               className="btn btn-danger m-2"
               onClick={() => {
+
+                dispatch({
+                  type: HANDLE_CHANGE_POST_API_SAGA,
+                  actionType: CHANGE_TASK_MODAL,
+                  name: "description",
+                  value: historyContent,
+                })
+                
                 setVisibleEditor(false);
               }}
             >
@@ -187,7 +212,7 @@ export default function ModalJira(props) {
                 value={taskDetailModal.typeId}
                 onChange={handleChange}
               >
-                {arrTaskType.map((task, index) => {
+                {arrTaskType?.map((task, index) => {
                   return (
                     <option key={index} value={task.id}>
                       {task.taskType}
@@ -348,7 +373,7 @@ export default function ModalJira(props) {
                   <div className="assignees">
                     <h6>ASSIGNEES</h6>
                     <div className="row">
-                      {taskDetailModal.assigness.map((assign, index) => {
+                      {taskDetailModal.assigness?.map((assign, index) => {
                         return (
                           <div className="col-8 mt-2 mb-2">
                             <div
@@ -363,11 +388,17 @@ export default function ModalJira(props) {
                               <div
                               style={{cursor: "pointer" }}
                                 onClick={() => {
-                                  console.log("dkm");
                                   dispatch({
-                                    type: REMOVE_USER_ASSIGN,
+                                    type: HANDLE_CHANGE_POST_API_SAGA,
+                                    actionType: REMOVE_USER_ASSIGN,
                                     userId: assign.id,
-                                  });
+                                  })
+                              
+
+                                  // dispatch({
+                                  //   type: REMOVE_USER_ASSIGN,
+                                  //   userId: assign.id,
+                                  // });
                                 }}
                               >
                                 <i
@@ -405,22 +436,30 @@ export default function ModalJira(props) {
                             if (value == "0") {
                               return;
                             }
-                            let userSelect = projectDetail.members.find(
+                            let userSelected = projectDetail.members.find(
                               (mem) => mem.userId == value
                             );
-                            console.log("userSelect", userSelect);
+                            console.log("userSelected", userSelected);
                             //do mảng assigness ko có thuộc tính userId mà là thuộc tính id,
-                            //và do mảng userSelect thiếu thuộc tính id
-                            //do đó ta tạo ra 1 thuộc tính mới là id chứa trong mảng userSelect và id đó dc gán =` giá trị của userSelect.userId
-                            userSelect = {
-                              ...userSelect,
-                              id: userSelect.userId,
+                            //và do mảng userSelected thiếu thuộc tính id
+                            //do đó ta tạo ra 1 thuộc tính mới là id chứa trong mảng userSelected và id đó dc gán =` giá trị của userSelected.userId
+                            userSelected = {
+                              ...userSelected,
+                              id: userSelected.userId,
                             };
 
                             dispatch({
-                              type: CHANGE_ASSIGNESS,
-                              userSelected: userSelect,
-                            });
+                              type: HANDLE_CHANGE_POST_API_SAGA,
+                              actionType: CHANGE_ASSIGNESS,
+                              userSelected
+                            })
+                        
+
+
+                            // dispatch({
+                            //   type: CHANGE_ASSIGNESS,
+                            //   userSelected: userSelect,
+                            // });
                           }}
                         ></Select>
                       </div>
@@ -436,7 +475,7 @@ export default function ModalJira(props) {
                         handleChange(e);
                       }}
                     >
-                      {arrPriority.map((item, index) => {
+                      {arrPriority?.map((item, index) => {
                         return (
                           <option key={index} value={item.priorityId}>
                             {item.priority}
