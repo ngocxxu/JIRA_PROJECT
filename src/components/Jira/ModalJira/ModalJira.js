@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactHtmlParser from "react-html-parser";
 import {
+  CHANGE_ASSIGNESS,
   CHANGE_TASK_MODAL,
   GET_ALL_TASK_TYPE_SAGA,
   GET_STATUS_SAGA,
+  REMOVE_USER_ASSIGN,
   UPDATE_STATUS_TASK_SAGA,
 } from "../../../redux/constants/Jira/TaskTypeConstant";
 import { GET_ALL_PRIORITY_SAGA } from "../../../redux/constants/Jira/PriorityConst";
 import { Editor } from "@tinymce/tinymce-react";
+import { Select } from "antd";
+
+const { Option } = Select;
 
 export default function ModalJira(props) {
   const dispatch = useDispatch();
@@ -16,9 +21,12 @@ export default function ModalJira(props) {
   const { arrStatus } = useSelector((state) => state.StatusReducer);
   const { arrPriority } = useSelector((state) => state.PriorityReducer);
   const { arrTaskType } = useSelector((state) => state.TaskTypeReducer);
+  const { projectDetail } = useSelector((state) => state.ProjectReducer);
 
   const [visibleEditor, setVisibleEditor] = useState(false);
-  const [historyContent, setHistoryContent] = useState(taskDetailModal.description);
+  const [historyContent, setHistoryContent] = useState(
+    taskDetailModal.description
+  );
   const [content, setContent] = useState(taskDetailModal.description);
 
   useEffect(() => {
@@ -124,19 +132,28 @@ export default function ModalJira(props) {
                 setContent(content);
               }}
             />
-            <button className="btn btn-primary m-2" onClick={()=>{
+            <button
+              className="btn btn-primary m-2"
+              onClick={() => {
+                dispatch({
+                  type: CHANGE_TASK_MODAL,
+                  name: "description",
+                  value: content, //content này của useState
+                });
 
-              dispatch({
-                type: CHANGE_TASK_MODAL,
-                name: 'description',
-                value: content, //content này của useState
-              })
-
-              setVisibleEditor(false)
-            }}>Save</button>
-            <button className="btn btn-danger m-2" onClick={() =>{
-              setVisibleEditor(false)
-            }}>Cancel</button>
+                setVisibleEditor(false);
+              }}
+            >
+              Save
+            </button>
+            <button
+              className="btn btn-danger m-2"
+              onClick={() => {
+                setVisibleEditor(false);
+              }}
+            >
+              Cancel
+            </button>
           </div>
         ) : (
           <div
@@ -330,30 +347,82 @@ export default function ModalJira(props) {
                   </div>
                   <div className="assignees">
                     <h6>ASSIGNEES</h6>
-                    <div style={{ display: "flex" }}>
+                    <div className="row">
                       {taskDetailModal.assigness.map((assign, index) => {
                         return (
-                          <div
-                            key={index}
-                            style={{ display: "flex" }}
-                            className="item"
-                          >
-                            <div className="avatar">
-                              <img src={assign.avatar} alt={assign.avatar} />
+                          <div className="col-8 mt-2 mb-2">
+                            <div
+                              key={index}
+                              style={{ display: "flex" }}
+                              className="item"
+                            >
+                              <div className="avatar">
+                                <img src={assign.avatar} alt={assign.avatar} />
+                              </div>
+                              <p className="name">{assign.name}</p>
+                              <div
+                              style={{cursor: "pointer" }}
+                                onClick={() => {
+                                  console.log("dkm");
+                                  dispatch({
+                                    type: REMOVE_USER_ASSIGN,
+                                    userId: assign.id,
+                                  });
+                                }}
+                              >
+                                <i
+                                  className="fa fa-times"
+                                  style={{ marginLeft: 5 }}
+                                />
+                              </div>
                             </div>
-                            <p className="name">
-                              {assign.name}
-                              <i
-                                className="fa fa-times"
-                                style={{ marginLeft: 5 }}
-                              />
-                            </p>
                           </div>
                         );
                       })}
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <i className="fa fa-plus" style={{ marginRight: 5 }} />
-                        <span>Add more</span>
+                      <div className="col-12 mt-2 mb-2">
+                        <Select
+                          options={projectDetail.members
+                            ?.filter((mem) => {
+                              //xét điều kiện, nếu index đã tồn tại
+                              let index = taskDetailModal.assigness?.findIndex(
+                                (us) => us.id === mem.userId
+                              );
+                              if (index !== -1) {
+                                return false;
+                              }
+                              return true; //nếu là true thì hàm map bên dưới sẽ binding những index đã dc filter
+                            })
+                            .map((mem, index) => {
+                              return { value: mem.userId, label: mem.name };
+                            })}
+                          optionFilterProp="label" //khi mà ta chọn trong bảng Options thì nó chỉ hiện tên Label thôi
+                          style={{ width: "100%" }}
+                          name="lstUser"
+                          value="+ Add More"
+                          className="form-control"
+                          onSelect={(value) => {
+                            //return, ko cho ng dùng làm gì tiếp, để họ chọn
+                            if (value == "0") {
+                              return;
+                            }
+                            let userSelect = projectDetail.members.find(
+                              (mem) => mem.userId == value
+                            );
+                            console.log("userSelect", userSelect);
+                            //do mảng assigness ko có thuộc tính userId mà là thuộc tính id,
+                            //và do mảng userSelect thiếu thuộc tính id
+                            //do đó ta tạo ra 1 thuộc tính mới là id chứa trong mảng userSelect và id đó dc gán =` giá trị của userSelect.userId
+                            userSelect = {
+                              ...userSelect,
+                              id: userSelect.userId,
+                            };
+
+                            dispatch({
+                              type: CHANGE_ASSIGNESS,
+                              userSelected: userSelect,
+                            });
+                          }}
+                        ></Select>
                       </div>
                     </div>
                   </div>
