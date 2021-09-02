@@ -1,40 +1,58 @@
 import React from "react";
 import avatar1 from "../../../assets/img/ava1.jfif";
 import avatar2 from "../../../assets/img/ava2.jfif";
+import { useDispatch, useSelector } from "react-redux";
+import { GET_TASK_DETAIL_SAGA } from "../../../redux/constants/Jira/TaskTypeConstant";
 
 export default function ContentMainJira({ projectDetail, ...props }) {
+
+  const dispatch = useDispatch();
   const renderCardTaskList = () => {
     return projectDetail.lstTask?.map((tastListDetail, index) => {
       return (
-        <div key={index} className="card" style={{ width: "17rem", height: "25rem" }}>
-          <div className="card-header">BACKLOG 3</div>
+        <div
+          key={index}
+          className="card"
+          style={{ width: "17rem", height: "auto" }}
+        >
+          <div className="card-header">{tastListDetail.statusName}</div>
           <ul className="list-group list-group-flush">
-            <li
-              className="list-group-item"
-              data-toggle="modal"
-              data-target="#infoModal"
-              style={{ cursor: "pointer" }}
-            >
-              <p>
-                Each issue has a single reporter but can have multiple assignees
-              </p>
-              <div className="block" style={{ display: "flex" }}>
-                <div className="block-left">
-                  <i className="fa fa-bookmark" />
-                  <i className="fa fa-arrow-up" />
-                </div>
-                <div className="block-right">
-                  <div className="avatar-group" style={{ display: "flex" }}>
-                    <div className="avatar">
-                      <img src={avatar1} alt />
+            {tastListDetail.lstTaskDeTail?.map((task, index) => {
+              console.log(tastListDetail.lstTaskDeTail)
+              return (
+                <li
+                onClick={() => {
+                  dispatch({
+                    type: GET_TASK_DETAIL_SAGA,
+                    taskId: task.taskId,
+                  })
+                }}
+                  key={index}
+                  className="list-group-item"
+                  data-toggle="modal"
+                  data-target="#infoModal"
+                  style={{ cursor: "pointer" }}
+                >
+                  <p>{task.taskName}</p>
+                  <div className="block" style={{ display: "flex" }}>
+                    <div className="block-left">
+                      <p className="text-danger">{task.priorityTask.priority}</p>
                     </div>
-                    <div className="avatar">
-                      <img src={avatar2} alt />
+                    <div className="block-right">
+                      <div className="avatar-group" style={{ display: "flex" }}>
+                        {task.assigness?.map((mem, index) => {
+                          return (
+                            <div key={index} className="avatar">
+                              <img src={mem.avatar} alt ={mem.avatar} />
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </li>
+                </li>
+              );
+            })}
           </ul>
         </div>
       );
@@ -48,9 +66,8 @@ export default function ContentMainJira({ projectDetail, ...props }) {
   );
 }
 
-
-
-{/* <div className="card" style={{ width: "17rem", height: "25rem" }}>
+{
+  /* <div className="card" style={{ width: "17rem", height: "25rem" }}>
 <div className="card-header">SELECTED FOR DEVELOPMENT 2</div>
 <ul className="list-group list-group-flush">
   <li className="list-group-item">Cras justo odio</li>
@@ -71,4 +88,5 @@ export default function ContentMainJira({ projectDetail, ...props }) {
   <li className="list-group-item">Dapibus ac facilisis in</li>
   <li className="list-group-item">Vestibulum at eros</li>
 </ul>
-</div> */}
+</div> */
+}

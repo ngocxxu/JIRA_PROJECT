@@ -20,7 +20,7 @@ import './App.css';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch } from "react-redux";
 import { JiraTemplate } from "./templates/JiraTemplate";
-import IndexJira from "./redux/sagas/Jira/IndexJira";
+import IndexJira from "./pages/Jira/ProjectDetail/IndexJira";
 import './index.css'
 import CreateProject from "./pages/Jira/CreateProject/CreateProject";
 import ProjectManagement from "./pages/Jira/ProjectManagement/ProjectManagement";

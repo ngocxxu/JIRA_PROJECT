@@ -1,6 +1,95 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ReactHtmlParser from "react-html-parser";
+import {
+  CHANGE_TASK_MODAL,
+  GET_ALL_TASK_TYPE_SAGA,
+  GET_STATUS_SAGA,
+  UPDATE_STATUS_TASK_SAGA,
+} from "../../../redux/constants/Jira/TaskTypeConstant";
+import { GET_ALL_PRIORITY_SAGA } from "../../../redux/constants/Jira/PriorityConst";
 
-export default function ModalJira() {
+export default function ModalJira(props) {
+  const dispatch = useDispatch();
+  const { taskDetailModal } = useSelector((state) => state.TaskReducer);
+  const { arrStatus } = useSelector((state) => state.StatusReducer);
+  const { arrPriority } = useSelector((state) => state.PriorityReducer);
+  const { arrTaskType } = useSelector((state) => state.TaskTypeReducer);
+
+  useEffect(() => {
+    dispatch({
+      type: GET_STATUS_SAGA,
+    });
+    dispatch({
+      type: GET_ALL_PRIORITY_SAGA,
+    });
+    dispatch({
+      type: GET_ALL_TASK_TYPE_SAGA,
+    });
+  }, []);
+
+  const renderTimeTracking = () => {
+    const { timeTrackingSpent, timeTrackingRemaining } = taskDetailModal;
+    const max = Number(timeTrackingSpent) + Number(timeTrackingRemaining);
+    const percent = Math.round((Number(timeTrackingSpent) / max) * 100);
+
+    return (
+      <div>
+        <div style={{ display: "flex" }}>
+          <i className="fa fa-clock" />
+          <div style={{ width: "100%" }}>
+            <div className="progress">
+              <div
+                className="progress-bar"
+                role="progressbar"
+                style={{ width: `${percent}%` }}
+                aria-valuenow={Number(timeTrackingSpent)}
+                aria-valuemin={Number(timeTrackingRemaining)}
+                aria-valuemax={max}
+              />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <p className="logged">{Number(timeTrackingSpent)}h logged</p>
+              <p className="estimate-time">
+                {Number(timeTrackingRemaining)}h remaining
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-6">
+            <input
+              className="form-control"
+              name="timeTrackingSpent"
+              onChange={handleChange}
+            ></input>
+          </div>
+          <div className="col-6">
+            <input
+              className="form-control"
+              name="timeTrackingRemaining"
+              onChange={handleChange}
+            ></input>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    dispatch({
+      type: CHANGE_TASK_MODAL,
+      name: name,
+      value: value,
+    });
+  };
+
   return (
     <div
       className="modal fade"
@@ -15,7 +104,12 @@ export default function ModalJira() {
           <div className="modal-header">
             <div className="task-title">
               <i className="fa fa-bookmark" />
-              <span>TASK-217871</span>
+              <select name = 'typeId' value={taskDetailModal.typeId} onChange={handleChange}>
+                {arrTaskType.map((task,index) => {
+                  return <option key={index} value={task.id}>{task.taskType}</option>
+                })}
+              </select>
+              <span>{taskDetailModal.taskName}</span>
             </div>
             <div style={{ display: "flex" }} className="task-click">
               <div>
@@ -44,18 +138,7 @@ export default function ModalJira() {
                   <p className="issue">This is an issue of type: Task.</p>
                   <div className="description">
                     <p>Description</p>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Esse expedita quis vero tempora error sed reprehenderit
-                      sequi laborum, repellendus quod laudantium tenetur nobis
-                      modi reiciendis sint architecto. Autem libero quibusdam
-                      odit assumenda fugiat? Beatae aliquid labore vitae
-                      obcaecati sapiente asperiores quia amet id aut, natus quo
-                      molestiae quod voluptas, temporibus iusto laudantium sit
-                      tempora sequi. Rem, itaque id, fugit magnam asperiores
-                      voluptas consectetur aliquid vel error illum, delectus eum
-                      eveniet laudantium at repudiandae!
-                    </p>
+                    {ReactHtmlParser(taskDetailModal.description)}
                   </div>
                   <div style={{ fontWeight: 500, marginBottom: 10 }}>
                     Jira Software (software projects) issue types:
@@ -146,85 +229,99 @@ export default function ModalJira() {
                 <div className="col-4">
                   <div className="status">
                     <h6>STATUS</h6>
-                    <select className="custom-select">
-                      <option value={''}>SELECTED FOR DEVELOPMENT</option>
-                      <option value={1}>One</option>
-                      <option value={2}>Two</option>
-                      <option value={3}>Three</option>
+                    <select
+                      name="statusId"
+                      onChange={(e) => {
+                        handleChange(e);
+
+                        // dispatch({
+                        //   type: UPDATE_STATUS_TASK_SAGA,
+                        //   taskUpdateStatus: {
+                        //     taskId: taskDetailModal.taskId,
+                        //     statusId: e.target.value ,
+                        //     projectId: taskDetailModal.projectId,
+                        //   }
+                        // })
+                        // console.log('taskUpdate',{
+                        //   taskId: taskDetailModal.taskId,
+                        //   statusId: e.target.value ,
+                        // })
+                      }}
+                      className="custom-select"
+                      value={taskDetailModal.statusId}
+                    >
+                      {arrStatus?.map((status, index) => {
+                        return (
+                          <option value={status.statusId} key={index}>
+                            {status.statusName}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                   <div className="assignees">
                     <h6>ASSIGNEES</h6>
                     <div style={{ display: "flex" }}>
-                      <div style={{ display: "flex" }} className="item">
-                        <div className="avatar">
-                          <img src="./assets/img/download (1).jfif" alt />
-                        </div>
-                        <p className="name">
-                          Pickle Rick
-                          <i
-                            className="fa fa-times"
-                            style={{ marginLeft: 5 }}
-                          />
-                        </p>
-                      </div>
+                      {taskDetailModal.assigness.map((assign, index) => {
+                        return (
+                          <div
+                            key={index}
+                            style={{ display: "flex" }}
+                            className="item"
+                          >
+                            <div className="avatar">
+                              <img src={assign.avatar} alt={assign.avatar} />
+                            </div>
+                            <p className="name">
+                              {assign.name}
+                              <i
+                                className="fa fa-times"
+                                style={{ marginLeft: 5 }}
+                              />
+                            </p>
+                          </div>
+                        );
+                      })}
                       <div style={{ display: "flex", alignItems: "center" }}>
                         <i className="fa fa-plus" style={{ marginRight: 5 }} />
                         <span>Add more</span>
                       </div>
                     </div>
                   </div>
-                  <div className="reporter">
-                    <h6>REPORTER</h6>
-                    <div style={{ display: "flex" }} className="item">
-                      <div className="avatar">
-                        <img src="./assets/img/download (1).jfif" alt />
-                      </div>
-                      <p className="name">
-                        Pickle Rick
-                        <i className="fa fa-times" style={{ marginLeft: 5 }} />
-                      </p>
-                    </div>
-                  </div>
                   <div className="priority" style={{ marginBottom: 20 }}>
                     <h6>PRIORITY</h6>
-                    <select>
-                      <option>Highest</option>
-                      <option>Medium</option>
-                      <option>Low</option>
-                      <option>Lowest</option>
+                    <select
+                      name="priorityId"
+                      className="form-control"
+                      value={taskDetailModal.priorityId}
+                      onChange={(e) => {
+                        handleChange(e);
+                      }}
+                    >
+                      {arrPriority.map((item, index) => {
+                        return (
+                          <option key={index} value={item.priorityId}>
+                            {item.priority}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                   <div className="estimate">
                     <h6>ORIGINAL ESTIMATE (HOURS)</h6>
-                    <input type="text" className="estimate-hours" />
+                    <input
+                      type="text"
+                      name="originalEstimate"
+                      className="estimate-hours"
+                      value={taskDetailModal.originalEstimate}
+                      onChange={(e) => {
+                        handleChange(e);
+                      }}
+                    />
                   </div>
                   <div className="time-tracking">
                     <h6>TIME TRACKING</h6>
-                    <div style={{ display: "flex" }}>
-                      <i className="fa fa-clock" />
-                      <div style={{ width: "100%" }}>
-                        <div className="progress">
-                          <div
-                            className="progress-bar"
-                            role="progressbar"
-                            style={{ width: "25%" }}
-                            aria-valuenow={25}
-                            aria-valuemin={0}
-                            aria-valuemax={100}
-                          />
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          <p className="logged">4h logged</p>
-                          <p className="estimate-time">12h estimated</p>
-                        </div>
-                      </div>
-                    </div>
+                    {renderTimeTracking()}
                   </div>
                   <div style={{ color: "#929398" }}>Create at a month ago</div>
                   <div style={{ color: "#929398" }}>

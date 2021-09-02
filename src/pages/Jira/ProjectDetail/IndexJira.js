@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {ProjectReducer} from '../../reducers/ProjectReducer'
+import {ProjectReducer} from '../../../redux/reducers/ProjectReducer'
 import ContentMainJira from "../../../components/Jira/Main/ContentMainJira";
 import HeaderMainJira from "../../../components/Jira/Main/HeaderMainJira";
 import InfoMainJira from "../../../components/Jira/Main/InfoMainJira";
