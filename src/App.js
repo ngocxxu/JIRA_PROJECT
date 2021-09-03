@@ -25,6 +25,8 @@ import './index.css'
 import CreateProject from "./pages/Jira/CreateProject/CreateProject";
 import ProjectManagement from "./pages/Jira/ProjectManagement/ProjectManagement";
 import ModalJira from "./HOC/JiraHOC/DrawerJira";
+import DemoDragDrop from "./pages/DemoDragDrop/DemoDragDrop";
+import DragAndDropDnd from "./pages/DragAndDropDnd/DragAndDropDnd";
 
 
 
@@ -60,6 +62,8 @@ function App() {
       {/* Switch dùng để khi page dc tìm thấy nó sẽ Break, giống cơ chế Switch Case */}
       <Switch>
         <HomeTemplate exact path="/home" component={Home}></HomeTemplate>
+        <HomeTemplate exact path="/dragdrop" component={DemoDragDrop}></HomeTemplate>
+        <HomeTemplate exact path="/dragdropdnd" component={DragAndDropDnd}></HomeTemplate>
         <HomeTemplate exact path="/contact" component={Contact}></HomeTemplate>
         <HomeTemplate exact path="/about" component={About}></HomeTemplate>
         <UserLoginTemplate exact path="/login" component={LoginJira}></UserLoginTemplate>

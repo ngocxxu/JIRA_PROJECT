@@ -17,13 +17,15 @@ export class TaskService extends BaseService {
     return this.get(`Project/getTaskDetail?taskId=${taskId}`)
   }
 
-  updateStatusTask = (taskUpdateStatus) => {
-    return this.put(`Project/updateStatus`,taskUpdateStatus)
-  }
+  // updateStatusTask = (taskUpdateStatus) => {
+  //   return this.put(`Project/updateStatus`,taskUpdateStatus)
+  // }
 
   updateTask = (taskUpdate)=>{
     return this.post(`Project/updateTask`,taskUpdate)
   }
+
+
 }
 
 //tạo đối tượng projectService để chứa các phương thức trên

@@ -63,6 +63,16 @@ export default function Header(props) {
             ToDoList SAGA
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/dragdrop" activeClassName="active-nav-item" activeStyle={{fontWeight: "bold"}}>
+            Drag Drop
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/dragdropdnd" activeClassName="active-nav-item" activeStyle={{fontWeight: "bold"}}>
+            Drag Drop DND
+            </NavLink>
+          </li>
           <li className="nav-item dropdown">
             <NavLink
               className="nav-link dropdown-toggle"

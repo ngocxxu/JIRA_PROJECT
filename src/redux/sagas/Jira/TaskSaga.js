@@ -1,4 +1,5 @@
 import { call, put, takeLatest, select } from "redux-saga/effects";
+import { jiraService } from "../../../services/JiraService";
 import { taskService } from "../../../services/TaskService";
 import { taskTypeService } from "../../../services/TaskTypeService";
 import { STATUS_CODE } from "../../../util/constants/settingSystem";
@@ -76,7 +77,7 @@ function* updateStatusTaskSaga(action) {
   const { taskUpdateStatus } = action;
   try {
     const { status, data } = yield call(() =>
-      taskService.updateStatusTask(taskUpdateStatus)
+      jiraService.updateStatusTask(taskUpdateStatus)
     );
     // console.log("updateStatusTask", data);
     if (status === STATUS_CODE.SUCCESS) {
@@ -184,3 +185,5 @@ export function* handleChangePostApi(action) {
 export function* theoDoiHandleChangePostApiSaga() {
   yield takeLatest(HANDLE_CHANGE_POST_API_SAGA, handleChangePostApi);
 }
+
+// updateStatusTask

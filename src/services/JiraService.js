@@ -45,6 +45,17 @@ export const jiraService = {
       headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}, //bearer là của lib JWT dùng để render ra các token
     })
   },
+
+
+  updateStatusTask:(taskUpdateStatus)=>{
+    return Axios({
+      url: `${DOMAIN_JIRA}/Project/updateStatus`,
+      method: 'PUT',
+      data: taskUpdateStatus, //gửi data len server api xử lý
+      headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}, //bearer là của lib JWT dùng để render ra các token
+    })
+  },
+
   
 };
 
