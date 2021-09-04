@@ -26,6 +26,7 @@ function* createTaskSaga(action) {
     const { status, data } = yield call(() =>
     jiraService.createTask(action.taskObject)
     );
+    console.log('createTaskSagaDATA',data);
 
     if (status === STATUS_CODE.SUCCESS) {
       console.log("tasksagaData", data);

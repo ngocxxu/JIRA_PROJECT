@@ -13,7 +13,6 @@ export class ProjectService extends BaseService {
   }
 
   getProjectDetails = (projectId) => {
-    console.log("delete")
 
     return this.get(`Project/getProjectDetail?id=${projectId}`);
   }

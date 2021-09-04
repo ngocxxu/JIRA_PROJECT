@@ -5,7 +5,7 @@ import { taskService } from "../../../services/TaskService";
 import { taskTypeService } from "../../../services/TaskTypeService";
 import { STATUS_CODE } from "../../../util/constants/settingSystem";
 import { notificationFunction } from "../../../util/Notification/notificationJira";
-import { DELETE_COMMENT_SAGA, GET_ALL_COMMENT, GET_ALL_COMMENT_SAGA, INSERT_COMMENT_SAGA } from "../../constants/Jira/CommentConst";
+import { DELETE_COMMENT_SAGA, EDIT_COMMENT, EDIT_COMMENT_SAGA, GET_ALL_COMMENT, GET_ALL_COMMENT_SAGA, INSERT_COMMENT_SAGA } from "../../constants/Jira/CommentConst";
 import { CLOSE_DRAWER } from "../../constants/Jira/DrawerConst";
 import {
   CHANGE_ASSIGNESS,
@@ -28,11 +28,11 @@ function* getAllCommentSaga(action) {
     const { status, data } = yield call(() =>
     jiraService.getCommentDetail(action.taskIdCmt)
     );
-    console.log('getAllCommentSaga1',data);
+    // console.log('getAllCommentSaga1',data);
 
 
     if (status === STATUS_CODE.SUCCESS) {
-      console.log('getAllCommentSaga2',data);
+      // console.log('getAllCommentSaga2',data);
 
       yield put({
         type: GET_ALL_COMMENT,
@@ -56,7 +56,7 @@ function* insertCommentSaga(action) {
     const { status, data } = yield call(() =>
     jiraService.insertComment(action.postComment)
     );
-    console.log(data);
+    console.log('insertCommentSaga',data);
 
     if (status === STATUS_CODE.SUCCESS) {
       yield put({
@@ -98,4 +98,31 @@ function* deleteCommentSaga(action) {
 
 export function* theoDoiDeleteCommentSaga() {
   yield takeLatest(DELETE_COMMENT_SAGA, deleteCommentSaga);
+}
+
+//----------edit comment 
+
+function* editCommentSaga(action) {
+
+  try {
+    const { status, data } = yield call(() =>
+    jiraService.editComment(action.contentComment, action.id)
+    );
+    console.log('editCommentSagaDATA',data);
+
+    if (status === STATUS_CODE.SUCCESS) {
+      yield put({
+        type: GET_ALL_COMMENT_SAGA,
+        taskIdCmt: action.taskIdCmt,
+      });
+    } else {
+      console.log("error");
+    }
+  } catch (err) {
+    console.log(err.response.data);
+  }
+}
+
+export function* theoDoiEditCommentSaga() {
+  yield takeLatest(EDIT_COMMENT_SAGA, editCommentSaga);
 }

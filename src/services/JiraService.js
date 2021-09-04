@@ -94,6 +94,16 @@ export const jiraService = {
     })
   },
 
+  //edit comment
+  editComment:(id,contentComment)=>{
+    return Axios({
+      url: `${DOMAIN_JIRA}/Comment/updateComment?id=${contentComment}&contentComment=${id}`,
+      method: 'PUT',
+      // data:id, contentComment,
+      headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}, //bearer là của lib JWT dùng để render ra các token
+    })
+  },
+
 
   
 };

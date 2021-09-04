@@ -158,7 +158,7 @@ export function* theoDoiDeleteProjectSaga() {
 
 //------get project detail info--------------------------------
 function* getProjectDetailSaga(action) {
-  // //hiển thị loading
+  //hiển thị loading
   yield put({
     type: DISPLAY_LOADING
   })

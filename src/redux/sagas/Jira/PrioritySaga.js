@@ -13,7 +13,6 @@ function * getAllPrioritySaga(action){
       type: GET_ALL_PRIORITY,
       arrPriority: data.content,
     })
-    console.log('data',data)
   }catch(err){console.log(err.response.data)}
 
 }

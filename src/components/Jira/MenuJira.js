@@ -1,16 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../../assets/img/download.jfif"
+// import logo from "../../assets/img/download.jfif"
+import logo from "../../assets/img/logo.jpg"
 
 export default function MenuJira() {
   return (
     <div className="menu">
       <div className="account">
         <div className="avatar">
-          <img src={logo} alt />
+          <img src={logo} alt = {logo} />
         </div>
         <div className="account-info">
-          <p>CyberLearn.vn</p>
+          <p>Jira Zupi Company</p>
           <p>Report bugs</p>
         </div>
       </div>

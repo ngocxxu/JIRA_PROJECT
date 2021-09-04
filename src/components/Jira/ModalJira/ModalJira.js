@@ -16,11 +16,13 @@ import { Editor } from "@tinymce/tinymce-react";
 import { Select } from "antd";
 import {
   DELETE_COMMENT_SAGA,
+  EDIT_COMMENT_SAGA,
   GET_ALL_COMMENT_SAGA,
   INSERT_COMMENT_SAGA
 } from "../../../redux/constants/Jira/CommentConst";
 import { ReactComponent as EnterKey } from "../../../assets/icon/enterkey.svg";
 import { withFormik } from "formik";
+import logo from "../../../assets/img/logo.jpg"
 
 const { Option } = Select;
 
@@ -44,14 +46,17 @@ function ModalJira(props) {
   const { lstComment } = useSelector((state) => state.CommentReducer);
 
   const [visibleEditor, setVisibleEditor] = useState(false);
+  const [visibleComment, setVisibleComment] = useState(false);
   const [historyContent, setHistoryContent] = useState(
     taskDetailModal.description
   );
   const [content, setContent] = useState(taskDetailModal.description);
 
-  const [stateValue, setStateValue] = useState({
+  const [stateEdit, setStateEdit] = useState({
     contentComment: ""
   });
+
+  const onClickEditComment = () => setVisibleComment(true);
 
   useEffect(() => {
     dispatch({
@@ -139,42 +144,6 @@ function ModalJira(props) {
     // });
   };
 
-  const handleComment = () => {
-    return lstComment?.map((comment, index) => {
-      console.log("comment", comment);
-
-      return (
-        <div
-          key={index}
-          className="display-comment"
-          style={{ display: "flex" }}
-        >
-          <div className="avatar">
-            <img src={comment.user.avatar} alt />
-          </div>
-          <div>
-            <p style={{ marginBottom: 5 }}>
-              {comment.user.name} <span>a month ago</span>
-            </p>
-            <p style={{ marginBottom: 5 }}>{comment.contentComment}</p>
-            <div>
-              <span style={{ color: "#929398", cursor: "pointer" }}>Edit</span>•
-              <span onClick={()=>{
-                dispatch({
-                  type: DELETE_COMMENT_SAGA,
-                  taskIdCmt: taskDetailModal.taskId,
-                  idComment: comment.id,
-                })
-              }} style={{ color: "#929398", cursor: "pointer" }}>
-                Delete
-              </span>
-            </div>
-          </div>
-        </div>
-      );
-    });
-  };
-
   const renderDescription = () => {
     const jsxDescription = ReactHtmlParser(taskDetailModal.description);
     return (
@@ -253,6 +222,83 @@ function ModalJira(props) {
         )}
       </div>
     );
+  };
+
+  const handleComment = () => {
+    return lstComment?.map((comment, index) => {
+      return (
+        <div
+          key={index}
+          className="display-comment"
+          style={{ display: "flex" }}
+        >
+          <div className="avatar">
+            <img src={comment.user.avatar} alt />
+          </div>
+          <div>
+            <p style={{ marginBottom: 5 }}>
+              {comment.user.name} <span>a month ago</span>
+            </p>
+            {visibleComment ? (
+              <form className="input-comment">
+                <input
+                  // value={comment.contentComment}
+                  name="contentComment"
+                  className="form-control"
+                  type="text"
+                  placeholder="Add a comment ..."
+                  onChange={(e) => {
+                    const { name, value } = e.target;
+                    const newValueEdit = {
+                      ...stateEdit.contentComment,
+                      [name]: value
+                    };
+                    setStateEdit(newValueEdit);
+                  }}
+                />
+                <span
+                  onClick={() => {
+                    dispatch({
+                      type: EDIT_COMMENT_SAGA,
+                      id: comment?.id,
+                      contentComment: stateEdit?.contentComment,
+                      taskIdCmt: comment?.taskId
+                    });
+                    setVisibleComment(false);
+                  }}
+                  style={{ color: "#929398", cursor: "pointer" }}
+                >
+                  Save
+                </span>
+              </form>
+            ) : (
+              <p style={{ marginBottom: 5 }}>{comment.contentComment}</p>
+            )}
+            <div>
+              <span
+                onClick={onClickEditComment}
+                style={{ color: "#929398", cursor: "pointer" }}
+              >
+                Edit
+              </span>
+              •
+              <span
+                onClick={() => {
+                  dispatch({
+                    type: DELETE_COMMENT_SAGA,
+                    taskIdCmt: taskDetailModal.taskId,
+                    idComment: comment.id
+                  });
+                }}
+                style={{ color: "#929398", cursor: "pointer" }}
+              >
+                Delete
+              </span>
+            </div>
+          </div>
+        </div>
+      );
+    });
   };
 
   return (
@@ -346,7 +392,7 @@ function ModalJira(props) {
                     <h6>Comment</h6>
                     <div className="block-comment" style={{ display: "flex" }}>
                       <div className="avatar">
-                        <img src="./assets/img/download (1).jfif" alt />
+                        <img src={logo} alt={logo} />
                       </div>
                       <form onSubmit={handleSubmit} className="input-comment">
                         <input
@@ -553,7 +599,7 @@ const createComment = withFormik({
   mapPropsToValues: (props) => {
     return {
       taskId: props.taskDetailModal.taskId,
-      contentComment: "",
+      contentComment: ""
     };
   },
 
@@ -562,10 +608,19 @@ const createComment = withFormik({
   handleSubmit: (values, { props, setSubmitting }) => {
     console.log("value", values); //values này là 1 obj chứa các giá trị return của mapproptostate
 
+    // props.dispatch({
+    //   type: EDIT_COMMENT_SAGA,
+    //   contentComment: values
+    // });
+
     props.dispatch({
       type: INSERT_COMMENT_SAGA,
       postComment: values
     });
+
+    // if(contentComment!==''){
+
+    // }
   },
   //displayName dùng để phân biệt các formik với nhau
   displayName: "CreateComment"
