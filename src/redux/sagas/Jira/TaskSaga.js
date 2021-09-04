@@ -1,3 +1,5 @@
+/* eslint-disable default-case */
+/* eslint-disable no-unused-vars */
 import { call, put, takeLatest, select } from "redux-saga/effects";
 import { jiraService } from "../../../services/JiraService";
 import { taskService } from "../../../services/TaskService";
@@ -22,7 +24,7 @@ import {
 function* createTaskSaga(action) {
   try {
     const { status, data } = yield call(() =>
-      taskService.createTask(action.taskObject)
+    jiraService.createTask(action.taskObject)
     );
 
     if (status === STATUS_CODE.SUCCESS) {
@@ -187,3 +189,5 @@ export function* theoDoiHandleChangePostApiSaga() {
 }
 
 // updateStatusTask
+
+

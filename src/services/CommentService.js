@@ -1,9 +1,6 @@
-/* eslint-disable no-useless-constructor */
 import { BaseService } from "./BaseService";
 
-
-//ProjectService kế thừa BaseService thông qua extends
-export class TaskService extends BaseService {
+export class CommentService extends BaseService {
 
   constructor(){
     super();
@@ -13,21 +10,21 @@ export class TaskService extends BaseService {
   //   return this.post(`Project/createTask`,taskObject);
   // }
 
-  getTaskDetail = (taskId) => {
-    return this.get(`Project/getTaskDetail?taskId=${taskId}`)
-  }
+  // getCommentDetail = (taskIdCmt) => {
+  //   console.log('alo tao qua đây r')
+  //   return this.get(`Comment/getAll?taskId=${taskIdCmt}`)
+  // }
 
   // updateStatusTask = (taskUpdateStatus) => {
   //   return this.put(`Project/updateStatus`,taskUpdateStatus)
   // }
 
-  updateTask = (taskUpdate)=>{
-    return this.post(`Project/updateTask`,taskUpdate)
-  }
+
+
 
 
 }
 
 //tạo đối tượng projectService để chứa các phương thức trên
 //export để có thể dùng dc trong các file saga
-export const taskService = new TaskService();
+export const commentService = new CommentService();

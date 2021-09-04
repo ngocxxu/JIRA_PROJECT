@@ -13,6 +13,7 @@ import * as TaskTypeSaga from './Jira/TaskTypeSaga'
 import * as PrioritySaga from './Jira/PrioritySaga'
 import * as TaskSaga from './Jira/TaskSaga'
 import * as StatusSaga from './Jira/StatusSaga'
+import * as CommentSaga from './Jira/CommentSaga'
 
 
 export function* rootSaga() {
@@ -50,6 +51,11 @@ export function* rootSaga() {
     TaskSaga.theoDoiHandleChangePostApiSaga(),
 
     StatusSaga.theoDoiStatusSaga(),
+
+    CommentSaga.theoDoiGetAllCommentSaga(),
+    CommentSaga.theoDoiInsertCommentSaga(),
+    CommentSaga.theoDoiDeleteCommentSaga(),
+    // CommentSaga.theoDoiditCommentSaga(),
 
 
   ])

@@ -56,6 +56,45 @@ export const jiraService = {
     })
   },
 
+  createTask: (taskObject)=>{
+    return Axios({
+      url: `${DOMAIN_JIRA}/Project/createTask`,
+      method: "POST",
+      data: taskObject,
+      headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}, //bearer là của lib JWT dùng để render ra các token
+    })
+  },
+
+  //get all comment
+  getCommentDetail:(taskIdCmt)=>{
+    return Axios({
+      url: `${DOMAIN_JIRA}/Comment/getAll?taskId=${taskIdCmt}`,
+      method: 'GET',
+      data:taskIdCmt,
+      headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}, //bearer là của lib JWT dùng để render ra các token
+    })
+  },
+  //insert comment
+  insertComment:(postComment)=>{
+    return Axios({
+      url: `${DOMAIN_JIRA}/Comment/insertComment`,
+      method: 'POST',
+      data:postComment,
+      headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}, //bearer là của lib JWT dùng để render ra các token
+    })
+  },
+
+  //delete comment
+  deleteComment:(idComment)=>{
+    return Axios({
+      url: `${DOMAIN_JIRA}/Comment/deleteComment?idComment=${idComment}`,
+      method: 'DELETE',
+      data:idComment,
+      headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}, //bearer là của lib JWT dùng để render ra các token
+    })
+  },
+
+
   
 };
 

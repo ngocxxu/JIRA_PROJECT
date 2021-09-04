@@ -4,9 +4,13 @@ import avatar2 from "../../../assets/img/ava2.jfif";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_TASK_DETAIL_SAGA, UPDATE_STATUS_TASK_SAGA } from "../../../redux/constants/Jira/TaskTypeConstant";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { GET_ALL_COMMENT_SAGA } from "../../../redux/constants/Jira/CommentConst";
 
 export default function ContentMainJira({ projectDetail, ...props }) {
   const dispatch = useDispatch();
+
+  const { taskDetailModal } = useSelector((state) => state.TaskReducer);
+
 
   const handleDragEnd = (result) => {
     console.log(result);
@@ -74,6 +78,7 @@ export default function ContentMainJira({ projectDetail, ...props }) {
                                       type: GET_TASK_DETAIL_SAGA,
                                       taskId: task.taskId,
                                     });
+
                                   }}
                                   key={index}
                                   className="list-group-item"

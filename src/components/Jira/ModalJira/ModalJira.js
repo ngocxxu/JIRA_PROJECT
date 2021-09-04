@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, connect } from "react-redux";
 import ReactHtmlParser from "react-html-parser";
 import {
   CHANGE_ASSIGNESS,
@@ -8,21 +9,39 @@ import {
   GET_STATUS_SAGA,
   HANDLE_CHANGE_POST_API_SAGA,
   REMOVE_USER_ASSIGN,
-  UPDATE_STATUS_TASK_SAGA,
+  UPDATE_STATUS_TASK_SAGA
 } from "../../../redux/constants/Jira/TaskTypeConstant";
 import { GET_ALL_PRIORITY_SAGA } from "../../../redux/constants/Jira/PriorityConst";
 import { Editor } from "@tinymce/tinymce-react";
 import { Select } from "antd";
+import {
+  DELETE_COMMENT_SAGA,
+  GET_ALL_COMMENT_SAGA,
+  INSERT_COMMENT_SAGA
+} from "../../../redux/constants/Jira/CommentConst";
+import { ReactComponent as EnterKey } from "../../../assets/icon/enterkey.svg";
+import { withFormik } from "formik";
 
 const { Option } = Select;
 
-export default function ModalJira(props) {
+function ModalJira(props) {
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    setFieldValue
+  } = props; //props này của Formik
+
   const dispatch = useDispatch();
   const { taskDetailModal } = useSelector((state) => state.TaskReducer);
   const { arrStatus } = useSelector((state) => state.StatusReducer);
   const { arrPriority } = useSelector((state) => state.PriorityReducer);
   const { arrTaskType } = useSelector((state) => state.TaskTypeReducer);
   const { projectDetail } = useSelector((state) => state.ProjectReducer);
+  const { lstComment } = useSelector((state) => state.CommentReducer);
 
   const [visibleEditor, setVisibleEditor] = useState(false);
   const [historyContent, setHistoryContent] = useState(
@@ -30,15 +49,24 @@ export default function ModalJira(props) {
   );
   const [content, setContent] = useState(taskDetailModal.description);
 
+  const [stateValue, setStateValue] = useState({
+    contentComment: ""
+  });
+
   useEffect(() => {
     dispatch({
-      type: GET_STATUS_SAGA,
+      type: GET_STATUS_SAGA
     });
     dispatch({
-      type: GET_ALL_PRIORITY_SAGA,
+      type: GET_ALL_PRIORITY_SAGA
     });
     dispatch({
-      type: GET_ALL_TASK_TYPE_SAGA,
+      type: GET_ALL_TASK_TYPE_SAGA
+    });
+    // gọi api cho Comment
+    dispatch({
+      type: GET_ALL_COMMENT_SAGA,
+      taskIdCmt: taskDetailModal.taskId
     });
   }, []);
 
@@ -64,7 +92,7 @@ export default function ModalJira(props) {
             <div
               style={{
                 display: "flex",
-                justifyContent: "space-between",
+                justifyContent: "space-between"
               }}
             >
               <p className="logged">{Number(timeTrackingSpent)}h logged</p>
@@ -79,14 +107,14 @@ export default function ModalJira(props) {
             <input
               className="form-control"
               name="timeTrackingSpent"
-              onChange={handleChange}
+              onChange={handleChangeModal}
             ></input>
           </div>
           <div className="col-6">
             <input
               className="form-control"
               name="timeTrackingRemaining"
-              onChange={handleChange}
+              onChange={handleChangeModal}
             ></input>
           </div>
         </div>
@@ -94,21 +122,57 @@ export default function ModalJira(props) {
     );
   };
 
-  const handleChange = (e) => {
+  const handleChangeModal = (e) => {
     const { name, value } = e.target;
 
     dispatch({
       type: HANDLE_CHANGE_POST_API_SAGA,
       actionType: CHANGE_TASK_MODAL,
       name: name,
-      value: value,
-    })
+      value: value
+    });
 
     // dispatch({
     //   type: CHANGE_TASK_MODAL,
     //   name: name,
     //   value: value,
     // });
+  };
+
+  const handleComment = () => {
+    return lstComment?.map((comment, index) => {
+      console.log("comment", comment);
+
+      return (
+        <div
+          key={index}
+          className="display-comment"
+          style={{ display: "flex" }}
+        >
+          <div className="avatar">
+            <img src={comment.user.avatar} alt />
+          </div>
+          <div>
+            <p style={{ marginBottom: 5 }}>
+              {comment.user.name} <span>a month ago</span>
+            </p>
+            <p style={{ marginBottom: 5 }}>{comment.contentComment}</p>
+            <div>
+              <span style={{ color: "#929398", cursor: "pointer" }}>Edit</span>•
+              <span onClick={()=>{
+                dispatch({
+                  type: DELETE_COMMENT_SAGA,
+                  taskIdCmt: taskDetailModal.taskId,
+                  idComment: comment.id,
+                })
+              }} style={{ color: "#929398", cursor: "pointer" }}>
+                Delete
+              </span>
+            </div>
+          </div>
+        </div>
+      );
+    });
   };
 
   const renderDescription = () => {
@@ -126,7 +190,7 @@ export default function ModalJira(props) {
                 plugins: [
                   "advlist autolink lists link image charmap print preview anchor",
                   "searchreplace visualblocks code fullscreen",
-                  "insertdatetime media table paste code help wordcount",
+                  "insertdatetime media table paste code help wordcount"
                 ],
                 toolbar:
                   "undo redo | formatselect | " +
@@ -134,7 +198,7 @@ export default function ModalJira(props) {
                   "alignright alignjustify | bullist numlist outdent indent | " +
                   "removeformat | help",
                 content_style:
-                  "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                  "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
               }}
               onEditorChange={(content, editor) => {
                 // setFieldValue("description", content);
@@ -144,13 +208,12 @@ export default function ModalJira(props) {
             <button
               className="btn btn-primary m-2"
               onClick={() => {
-
                 dispatch({
                   type: HANDLE_CHANGE_POST_API_SAGA,
                   actionType: CHANGE_TASK_MODAL,
                   name: "description",
-                  value: content,
-                })
+                  value: content
+                });
 
                 // dispatch({
                 //   type: CHANGE_TASK_MODAL,
@@ -166,14 +229,13 @@ export default function ModalJira(props) {
             <button
               className="btn btn-danger m-2"
               onClick={() => {
-
                 dispatch({
                   type: HANDLE_CHANGE_POST_API_SAGA,
                   actionType: CHANGE_TASK_MODAL,
                   name: "description",
-                  value: historyContent,
-                })
-                
+                  value: historyContent
+                });
+
                 setVisibleEditor(false);
               }}
             >
@@ -210,7 +272,7 @@ export default function ModalJira(props) {
               <select
                 name="typeId"
                 value={taskDetailModal.typeId}
-                onChange={handleChange}
+                onChange={handleChangeModal}
               >
                 {arrTaskType?.map((task, index) => {
                   return (
@@ -286,54 +348,23 @@ export default function ModalJira(props) {
                       <div className="avatar">
                         <img src="./assets/img/download (1).jfif" alt />
                       </div>
-                      <div className="input-comment">
-                        <input type="text" placeholder="Add a comment ..." />
+                      <form onSubmit={handleSubmit} className="input-comment">
+                        <input
+                          name="contentComment"
+                          className="form-control"
+                          type="text"
+                          placeholder="Add a comment ..."
+                          onChange={handleChange}
+                        />
                         <p>
-                          <span style={{ fontWeight: 500, color: "gray" }}>
-                            Protip:
-                          </span>
-                          <span>
-                            press
-                            <span
-                              style={{
-                                fontWeight: "bold",
-                                background: "#ecedf0",
-                                color: "#b4bac6",
-                              }}
-                            >
-                              M
-                            </span>
-                            to comment
-                          </span>
+                          Press
+                          <EnterKey className="m-1"></EnterKey>
+                          to post your comment
                         </p>
-                      </div>
+                      </form>
                     </div>
                     <div className="lastest-comment">
-                      <div className="comment-item">
-                        <div
-                          className="display-comment"
-                          style={{ display: "flex" }}
-                        >
-                          <div className="avatar">
-                            <img src="./assets/img/download (1).jfif" alt />
-                          </div>
-                          <div>
-                            <p style={{ marginBottom: 5 }}>
-                              Lord Gaben <span>a month ago</span>
-                            </p>
-                            <p style={{ marginBottom: 5 }}>
-                              Lorem ipsum dolor sit amet, consectetur
-                              adipisicing elit. Repellendus tempora ex
-                              voluptatum saepe ab officiis alias totam ad
-                              accusamus molestiae?
-                            </p>
-                            <div>
-                              <span style={{ color: "#929398" }}>Edit</span>•
-                              <span style={{ color: "#929398" }}>Delete</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <div className="comment-item">{handleComment()}</div>
                     </div>
                   </div>
                 </div>
@@ -343,7 +374,7 @@ export default function ModalJira(props) {
                     <select
                       name="statusId"
                       onChange={(e) => {
-                        handleChange(e);
+                        handleChangeModal(e);
 
                         // dispatch({
                         //   type: UPDATE_STATUS_TASK_SAGA,
@@ -386,14 +417,13 @@ export default function ModalJira(props) {
                               </div>
                               <p className="name">{assign.name}</p>
                               <div
-                              style={{cursor: "pointer" }}
+                                style={{ cursor: "pointer" }}
                                 onClick={() => {
                                   dispatch({
                                     type: HANDLE_CHANGE_POST_API_SAGA,
                                     actionType: REMOVE_USER_ASSIGN,
-                                    userId: assign.id,
-                                  })
-                              
+                                    userId: assign.id
+                                  });
 
                                   // dispatch({
                                   //   type: REMOVE_USER_ASSIGN,
@@ -445,16 +475,14 @@ export default function ModalJira(props) {
                             //do đó ta tạo ra 1 thuộc tính mới là id chứa trong mảng userSelected và id đó dc gán =` giá trị của userSelected.userId
                             userSelected = {
                               ...userSelected,
-                              id: userSelected.userId,
+                              id: userSelected.userId
                             };
 
                             dispatch({
                               type: HANDLE_CHANGE_POST_API_SAGA,
                               actionType: CHANGE_ASSIGNESS,
                               userSelected
-                            })
-                        
-
+                            });
 
                             // dispatch({
                             //   type: CHANGE_ASSIGNESS,
@@ -472,7 +500,7 @@ export default function ModalJira(props) {
                       className="form-control"
                       value={taskDetailModal.priorityId}
                       onChange={(e) => {
-                        handleChange(e);
+                        handleChangeModal(e);
                       }}
                     >
                       {arrPriority?.map((item, index) => {
@@ -492,7 +520,7 @@ export default function ModalJira(props) {
                       className="estimate-hours"
                       value={taskDetailModal.originalEstimate}
                       onChange={(e) => {
-                        handleChange(e);
+                        handleChangeModal(e);
                       }}
                     />
                   </div>
@@ -513,3 +541,44 @@ export default function ModalJira(props) {
     </div>
   );
 }
+
+//cha bọc con (LoginJira), con nhận props
+const createComment = withFormik({
+  //vì mapPropToValue chỉ chạy lần đầu tiên nên nếu ta muốn mapPropsToValues chạy lại mỗi lần render thì dùng
+  //props(ý nói mảng arrProjectCategory) của redux(reducer) mà thay đổi thì nó sẽ lập tức render lại các giá trị trong mapPropsToValues
+  enableReinitialize: true,
+
+  //lấy props từ các trường name của password và email để đưa vô đây xử lý value
+  //mapPropToValue chỉ chạy lần đầu tiên
+  mapPropsToValues: (props) => {
+    return {
+      taskId: props.taskDetailModal.taskId,
+      contentComment: "",
+    };
+  },
+
+  //hàm này lấy dữ liệu từ form sau khi ta submit
+  //props từ redux sẽ dc nhận ở đây
+  handleSubmit: (values, { props, setSubmitting }) => {
+    console.log("value", values); //values này là 1 obj chứa các giá trị return của mapproptostate
+
+    props.dispatch({
+      type: INSERT_COMMENT_SAGA,
+      postComment: values
+    });
+  },
+  //displayName dùng để phân biệt các formik với nhau
+  displayName: "CreateComment"
+})(ModalJira);
+
+//mapstatetoprops lấy state từ reducer
+const mapStateToProps = (state) => {
+  return {
+    arrProjectCategory: state.ProjectCategoryReducer.arrProjectCategory,
+    taskDetailModal: state.TaskReducer.taskDetailModal
+  };
+};
+
+//hàm connect (hàm của redux) bọc thằng LoginJiraWithFormik thì LoginJiraWithFormik sẽ có props của redux
+//cha bọc con, con nhận props
+export default connect(mapStateToProps)(createComment);
