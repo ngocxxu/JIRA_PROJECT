@@ -184,8 +184,8 @@ export default function ProjectManagement(props) {
       dataIndex: "creator",
       key: "creator",
       render: (text, record, index) => {
-        console.log("text", text); //là obj chứa id và name
-        console.log("record", record);
+        // console.log("text", text); //là obj chứa id và name
+        // console.log("record", record);
         return <Tag color="green">{record.creator?.name}</Tag>;
       },
       sorter: (item2, item1) => {
@@ -211,6 +211,7 @@ export default function ProjectManagement(props) {
             {record.members?.slice(0, 3).map((member, index) => {
               return (
                 <Popover
+                key={index}
                   placement="top"
                   title={"Member"}
                   content={() => {
@@ -232,7 +233,7 @@ export default function ProjectManagement(props) {
                                 <td>
                                   <img
                                     src={mem.avatar}
-                                    alt="avatar"
+                                    alt={mem.avatar}
                                     width="20"
                                     height="20"
                                   ></img>
@@ -262,7 +263,7 @@ export default function ProjectManagement(props) {
                     );
                   }}
                 >
-                  <Avatar key={index} src={member.avatar} alt="avatar"></Avatar>
+                  <Avatar key={index} src={member.avatar} alt={member.avatar}></Avatar>
                 </Popover>
               );
             })}

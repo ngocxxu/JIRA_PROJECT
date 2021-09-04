@@ -1,6 +1,6 @@
 export const DOMAIN = 'http://svcy.myclass.vn/api';
 
-export const DOMAIN_JIRA = 'http://jiranew.cybersoft.edu.vn/api';
+export const DOMAIN_JIRA = 'https://jiranew.cybersoft.edu.vn/api';
 
 export const TOKEN = 'access_token';
 export const USER_LOGIN = 'USER_LOGIN';

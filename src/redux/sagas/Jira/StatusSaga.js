@@ -8,7 +8,7 @@ import { CLOSE_DRAWER } from "../../constants/Jira/DrawerConst";
 import { CREATE_TASK_SAGA, GET_ALL_TASK_TYPE, GET_CREATE_TASK_SAGA, GET_STATUS, GET_STATUS_SAGA, STATUS_SAGA } from "../../constants/Jira/TaskTypeConstant";
 
 function * statusSaga(action){
-  console.log('GET_STATUS_SAGA',GET_STATUS_SAGA)
+  // console.log('GET_STATUS_SAGA',GET_STATUS_SAGA)
   try{
     const {status, data} = yield call (()=> statusService.getAllStatus())
 

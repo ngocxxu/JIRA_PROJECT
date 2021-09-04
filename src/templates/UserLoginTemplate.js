@@ -38,7 +38,7 @@ export const UserLoginTemplate = (props) => {
                 <img
                   className="w-100 vh-100"
                   src="https://picsum.photos/2000/2000"
-                  alt="..."
+                  alt="abc"
                 />
               </div>
               <div className="w-50">
