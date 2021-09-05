@@ -118,7 +118,7 @@ function FormCreateTask({
         >
           {arrStatus.map((statusID, index) => {
             return (
-              <option key={index} value={statusID.id}>
+              <option key={index} value={statusID.statusId}>
                 {statusID.statusName}
               </option>
             );
@@ -325,7 +325,7 @@ const createTaskForm = withFormik({
       type: CREATE_TASK_SAGA,
       taskObject: values,
     });
-    console.log("taskObj", values);
+    console.log("CreateTask", values);
   },
   //displayName dùng để phân biệt các formik với nhau
   displayName: "createTaskFormik",

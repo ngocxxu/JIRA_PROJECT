@@ -22,7 +22,7 @@ import {
 } from "../../../redux/constants/Jira/CommentConst";
 import { ReactComponent as EnterKey } from "../../../assets/icon/enterkey.svg";
 import { withFormik } from "formik";
-import logo from "../../../assets/img/logo.jpg"
+import logo from "../../../assets/img/logo.jpg";
 
 const { Option } = Select;
 
@@ -68,11 +68,22 @@ function ModalJira(props) {
     dispatch({
       type: GET_ALL_TASK_TYPE_SAGA
     });
+
     // gọi api cho Comment
-    dispatch({
-      type: GET_ALL_COMMENT_SAGA,
-      taskIdCmt: taskDetailModal.taskId
-    });
+    setTimeout(
+      () =>{
+        console.log('taskDetailModal.taskId settimeout',taskDetailModal.taskId)
+        dispatch({
+          type: GET_ALL_COMMENT_SAGA,
+          taskIdCmt: taskDetailModal.taskId
+        })},
+      5000
+    );
+    // gọi api cho Comment
+    // dispatch({
+    //   type: GET_ALL_COMMENT_SAGA,
+    //   taskIdCmt: taskDetailModal.taskId
+    // });
   }, []);
 
   const renderTimeTracking = () => {

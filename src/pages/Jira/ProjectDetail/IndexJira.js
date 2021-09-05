@@ -9,7 +9,7 @@ export default function IndexJira(props) {
 
   //lấy mảng projectDetail từ redux
   const {projectDetail} = useSelector(state => state.ProjectReducer)
-  console.log('projectDetailIndex',projectDetail)
+  // console.log('projectDetailIndex',projectDetail)
 
   const dispatch = useDispatch();
 

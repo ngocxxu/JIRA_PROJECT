@@ -19,7 +19,7 @@ const initialState = {
       },
     ],
     lstComment: [],
-    taskId: 925,
+    taskId: 0,
     taskName: "backlog 2",
     alias: "backlog-2",
     description: "<p>safsafds sdfhisdh ffdsf&nbsp;</p>",

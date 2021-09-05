@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import LoadingReducer from '../../../redux/reducers/LoadingReducer'
 import styleLoading from './LoadingComponent.module.css'
-import loading from '../../../assets/imgLoading/loading.gif'
+import loading from '../../../assets/imgLoading/load.gif'
 
 
 export default function LoadingComponent(props) {

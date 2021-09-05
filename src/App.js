@@ -27,6 +27,7 @@ import ProjectManagement from "./pages/Jira/ProjectManagement/ProjectManagement"
 import ModalJira from "./HOC/JiraHOC/DrawerJira";
 import DemoDragDrop from "./pages/DemoDragDrop/DemoDragDrop";
 import DragAndDropDnd from "./pages/DragAndDropDnd/DragAndDropDnd";
+import RegisterJira from "./pages/Jira/LoginJira/RegisterJira";
 
 
 
@@ -67,6 +68,7 @@ function App() {
         <HomeTemplate exact path="/contact" component={Contact}></HomeTemplate>
         <HomeTemplate exact path="/about" component={About}></HomeTemplate>
         <UserLoginTemplate exact path="/login" component={LoginJira}></UserLoginTemplate>
+        <UserLoginTemplate exact path="/register" component={RegisterJira}></UserLoginTemplate>
         <HomeTemplate exact path="/profile" component={Profile}></HomeTemplate>
         {/* <HomeTemplate exact path="/todolistrcc" component={ToDoList}></HomeTemplate> */}
         {/* <HomeTemplate exact path="/todolistrfc" component={ToDoListRFC}></HomeTemplate> */}
@@ -78,7 +80,7 @@ function App() {
         <JiraTemplate exact path="/createproject" component={CreateProject}></JiraTemplate>
         <JiraTemplate exact path="/projectmanagement" component={ProjectManagement}></JiraTemplate>
         <JiraTemplate exact path="/projectdetail/:projectId" component={IndexJira}></JiraTemplate>
-        <JiraTemplate exact path="/" component={ProjectManagement}></JiraTemplate>
+        <JiraTemplate exact path="/login" component={ProjectManagement}></JiraTemplate>
         {/* tránh người dùng gõ bậy bạ trên URL, khi URL ko hợp lý thì sẽ trả về trang PageNotFound */}
         <HomeTemplate path="*" component={PageNotFound}></HomeTemplate>
 

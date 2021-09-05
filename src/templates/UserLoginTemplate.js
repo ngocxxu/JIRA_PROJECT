@@ -33,16 +33,18 @@ export const UserLoginTemplate = (props) => {
       render={(propsRoute) => {
         return (
           <Fragment>
-            <div className="d-flex">
-              <div className="w-50">
-                <img
-                  className="w-100 vh-100"
-                  src="https://picsum.photos/2000/2000"
+            <div className="container-fluid">
+              <div className="row">
+              <div className="col-lg-6 col-md-12 w-100 bg-left">
+                {/* <img
+                  className="mw-100"
+                  src="https://picsum.photos/2000"
                   alt="abc"
-                />
+                /> */}
               </div>
-              <div className="w-50">
+              <div className="col-lg-6 col-md-12 bg-glassmorphism">
                 <props.component {...propsRoute}></props.component>
+              </div>
               </div>
             </div>
           </Fragment>

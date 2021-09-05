@@ -2,7 +2,10 @@ import React from "react";
 import avatar1 from "../../../assets/img/ava1.jfif";
 import avatar2 from "../../../assets/img/ava2.jfif";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_TASK_DETAIL_SAGA, UPDATE_STATUS_TASK_SAGA } from "../../../redux/constants/Jira/TaskTypeConstant";
+import {
+  GET_TASK_DETAIL_SAGA,
+  UPDATE_STATUS_TASK_SAGA
+} from "../../../redux/constants/Jira/TaskTypeConstant";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { GET_ALL_COMMENT_SAGA } from "../../../redux/constants/Jira/CommentConst";
 
@@ -11,32 +14,34 @@ export default function ContentMainJira({ projectDetail, ...props }) {
 
   const { taskDetailModal } = useSelector((state) => state.TaskReducer);
 
-
   const handleDragEnd = (result) => {
     console.log(result);
-    let {projectId, taskId} = JSON.parse(result.draggableId); //lấy ra chuỗi sau mỗi lần draggable và dùng JSON chuyển về obj
-    let {source, destination} = result;
-    console.log('source',source)
-    console.log('destination',destination)
-    console.log('source.draggableId',source.draggableId)
+    let { projectId, taskId } = JSON.parse(result.draggableId); //lấy ra chuỗi sau mỗi lần draggable và dùng JSON chuyển về obj
+    let { source, destination } = result;
+    console.log("source", source);
+    console.log("destination", destination);
+    console.log("source.draggableId", source.draggableId);
 
     //return dừng hàm, nếu nó tự kéo thả trên vị trí của nó thì ta ko cần phải update
-    if(!destination){
+    if (!destination) {
       return;
     }
     //return dừng hàm, nếu nó tự kéo thả trên vị trí của nó thì ta ko cần phải update
-    if(source.index === destination.index && source.droppableId === destination.droppableId){
+    if (
+      source.index === destination.index &&
+      source.droppableId === destination.droppableId
+    ) {
       return;
     }
     //gọi api update lại status
     dispatch({
-      type:UPDATE_STATUS_TASK_SAGA,
-      taskUpdateStatus:{
+      type: UPDATE_STATUS_TASK_SAGA,
+      taskUpdateStatus: {
         statusId: destination.droppableId,
-        taskId:taskId,
-        projectId:projectId,
+        taskId: taskId,
+        projectId: projectId
       }
-    })
+    });
   };
   const renderCardTaskList = () => {
     return (
@@ -65,7 +70,10 @@ export default function ContentMainJira({ projectDetail, ...props }) {
                           <Draggable
                             key={task.taskId.toString()}
                             index={index}
-                            draggableId={JSON.stringify({projectId: task.projectId, taskId: task.taskId})}
+                            draggableId={JSON.stringify({
+                              projectId: task.projectId,
+                              taskId: task.taskId
+                            })}
                           >
                             {(provided) => {
                               return (
@@ -76,9 +84,8 @@ export default function ContentMainJira({ projectDetail, ...props }) {
                                   onClick={() => {
                                     dispatch({
                                       type: GET_TASK_DETAIL_SAGA,
-                                      taskId: task.taskId,
+                                      taskId: task.taskId
                                     });
-
                                   }}
                                   key={index}
                                   className="list-group-item"

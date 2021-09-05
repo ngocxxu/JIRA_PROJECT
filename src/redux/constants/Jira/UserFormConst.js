@@ -1,0 +1,3 @@
+export const USER_FORM_SERVICE = 'USER_FORM_SERVICE';
+
+export const USER_SIGN_UP_SAGA = 'USER_SIGN_UP_SAGA'

@@ -55,7 +55,7 @@ function* signinSaga(action) {
     // //lấy giá trị về từ reducer
     // let history = yield select(state => state.HistoryReducer.history);
 
-    history.push("/createBrowserHistory");
+    history.push("/projectmanagement");
   } catch (err) {
     console.error(err.response.data);
   }
@@ -184,6 +184,8 @@ function * getUserByProjectSaga(action) {
 export function* theoDoiGetUserByProject() {
   yield takeLatest(GET_USER_BY_PROJECT_SAGA, getUserByProjectSaga);
 }
+
+
 
 
 
