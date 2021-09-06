@@ -2,11 +2,11 @@ import React from "react";
 
 export default function HeaderMainJira({ projectDetail, ...props }) {
   return (
-    <div className="header">
+    <div className="header mt-3">
       <nav aria-label="breadcrumb">
-        <ol className="breadcrumb" style={{ backgroundColor: "white" }}>
-          <li className="breadcrumb-item">Project</li>
-          <li className="breadcrumb-item">CyberLearn</li>
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item ml-2">Project</li>
+          <li className="breadcrumb-item">JiraZupi</li>
           <li className="breadcrumb-item">Project Management</li>
           <li className="breadcrumb-item active" aria-current="page">
             {projectDetail.projectName}

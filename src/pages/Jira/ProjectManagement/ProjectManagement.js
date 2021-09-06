@@ -136,6 +136,7 @@ export default function ProjectManagement(props) {
       dataIndex: "projectName",
       key: "projectName",
       render:(text,record, index)=>{
+        // console.log('projectList123',projectList);
         return <NavLink to={`/projectdetail/${record.id}`}>{text}</NavLink> //text ở đây chứa project name
       },
       //sort theo kí tự abc
@@ -349,7 +350,7 @@ export default function ProjectManagement(props) {
               className="btn btn-primary"
               type
               onClick={() => {
-                console.log("record", record);
+                // console.log("text123", text);
                 //dispatch này để mở form
                 dispatch({
                   type: OPEN_FORM_EDIT_PROJECT,
@@ -402,7 +403,7 @@ export default function ProjectManagement(props) {
   ];
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       <h3 className="mt-3">Project Management</h3>
       <Space style={{ marginBottom: 16 }}>
         <Button onClick={setAgeSort}>Sort age</Button>
@@ -410,6 +411,7 @@ export default function ProjectManagement(props) {
         <Button onClick={clearAll}>Clear filters and sorters</Button>
       </Space>
       <Table
+      className='bg-glass'
         rowKey={"id"}
         columns={columns}
         dataSource={projectList}

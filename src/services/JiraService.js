@@ -104,6 +104,19 @@ export const jiraService = {
     })
   },
 
+  //edit comment
+  updateUserAdminAPI:(updateUser)=>{
+    return Axios({
+      url: `${DOMAIN_JIRA}/Users/editUser`,
+      method: 'PUT',
+      data:updateUser,
+      headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}, //bearer là của lib JWT dùng để render ra các token
+    })
+  },
+
+  // updateUserAdminAPI = (updateUser) => {
+  //   return this.put(`Users/editUser`,updateUser);
+  // };
 
   
 };

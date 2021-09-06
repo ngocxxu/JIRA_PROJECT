@@ -59,6 +59,9 @@ export function* rootSaga() {
     CommentSaga.theoDoiEditCommentSaga(),
 
     UserAdminSaga.theoDoiUserSignUpSaga(),
+    UserAdminSaga.theoDoiGetUserAdminSaga(),
+    UserAdminSaga.theoDoiDeleteUserAdminSaga(),
+    UserAdminSaga.theoDoiUpdateUserAdminSaga(),
 
   ])
 

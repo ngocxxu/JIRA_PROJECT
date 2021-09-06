@@ -65,7 +65,7 @@ export default function RegisterJira(props) {
         className="d-flex flex-column justify-content-center align-items-center"
         style={{ height: window.innerHeight }}
       >
-        <div>
+        <div style={{display: 'flex'}}>
           <button type="button" className="btn text-white btn-signup">
             <NavLink
             className="text-white"
@@ -150,7 +150,7 @@ export default function RegisterJira(props) {
                 ""
               )}
             </div>
-            <button className="btn text-white w-100 my-4 button-login ">
+            <button className="btn text-white w-100 my-4 btn-grad ">
               Register
             </button>
           </div>

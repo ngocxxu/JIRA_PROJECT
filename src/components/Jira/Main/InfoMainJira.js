@@ -17,14 +17,23 @@ export default function InfoMainJira({ projectDetail, ...props }) {
 
   return (
     <>
-      <h2>{projectDetail.projectName}</h2>
-      <h5>Detail Description</h5>
-      <section>
-        {/* ReactHtmlParser dùng để parse ra các dữ liệu từ description khi ta sử
+      <div className="container mt-4 mb-4">
+        <div className="row text-center" style={{justifyContent: 'space-evenly'}}>
+          <div className="col-5 bg-glass p-2">
+            <h5>Name Project</h5>
+            <p className="">{projectDetail.projectName}</p>
+          </div>
+          <div className="col-5 bg-glass p-2">
+            <h5>Detail Description</h5>
+            <div>
+              {/* ReactHtmlParser dùng để parse ra các dữ liệu từ description khi ta sử
         dụng các công cụ của editor (tô màu chữ, chữ to, canh lề...) nó vẫn sẽ
         giữ nguyên ko bị mất format từ edit */}
-        {ReactHtmlParser(projectDetail.description)}
-      </section>
+              {ReactHtmlParser(projectDetail.description)}
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="info" style={{ display: "flex" }}>
         <div className="search-block">
           <input className="search" />

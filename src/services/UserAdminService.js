@@ -8,10 +8,17 @@ export class UserAdminService extends BaseService {
   }
 
   userSignUpAPI = (signUpForm) => {
-    return this.post(`Users/signup`,signUpForm);
-
+    return this.post(`Users/signup`, signUpForm);
   };
-
+  getUserAdminAPI = () => {
+    return this.get(`Users/getUser`);
+  };
+  deleteUserAdminAPI = (userId) => {
+    return this.delete(`Users/deleteUser?id=${userId}`);
+  };
+  // updateUserAdminAPI = (updateUser) => {
+  //   return this.put(`Users/editUser`,updateUser);
+  // };
 }
 
 //tạo đối tượng projectService để chứa các phương thức trên

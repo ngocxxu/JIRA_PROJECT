@@ -37,7 +37,7 @@ function LoginJira(props) {
         className="d-flex flex-column justify-content-center align-items-center"
         style={{ height: window.innerHeight }}
       >
-        <div>
+        <div className='d-flex'>
           <button type="button" className="btn text-white btn-signin">
             <NavLink
             className="text-white"
@@ -95,7 +95,7 @@ function LoginJira(props) {
                 ""
               )}
               <button
-                className="btn text-white w-100 my-4 button-login "
+                className="btn text-white w-100 my-4 btn-grad "
               >
                 Login
               </button>
