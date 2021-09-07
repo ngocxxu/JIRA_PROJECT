@@ -30,9 +30,11 @@ import DragAndDropDnd from "./pages/DragAndDropDnd/DragAndDropDnd";
 import RegisterJira from "./pages/Jira/LoginJira/RegisterJira";
 import UserAdmin from "./pages/Admin/UserAdmin";
 import Coordination from "./components/Jira/Coordination/Coordination";
-import Minigame from "./components/Jira/Coordination/Minigame";
 import Miniproject from "./components/Jira/Coordination/Miniproject";
 import Aboutme from "./components/Jira/Coordination/Aboutme";
+import Minidesign from "./components/Jira/Coordination/Minidesign";
+import MySkill from "./components/Jira/Coordination/MySkill";
+import ContactMe from "./components/Jira/Coordination/ContactMe";
 
 
 
@@ -67,7 +69,7 @@ function App() {
 
       {/* Switch dùng để khi page dc tìm thấy nó sẽ Break, giống cơ chế Switch Case */}
       <Switch>
-        <HomeTemplate exact path="/home" component={Home}></HomeTemplate>
+        {/* <HomeTemplate exact path="/home" component={Home}></HomeTemplate> */}
         {/* <HomeTemplate exact path="/dragdrop" component={DemoDragDrop}></HomeTemplate>
         <HomeTemplate exact path="/dragdropdnd" component={DragAndDropDnd}></HomeTemplate>
         <HomeTemplate exact path="/contact" component={Contact}></HomeTemplate>
@@ -86,9 +88,11 @@ function App() {
         <JiraTemplate exact path="/projectmanagement" component={ProjectManagement}></JiraTemplate>
         <JiraTemplate exact path="/usermanagement" component={UserAdmin}></JiraTemplate>
         <JiraTemplate exact path="/coordination" component={Coordination}></JiraTemplate>
-        <JiraTemplate exact path="/minigame" component={Minigame}></JiraTemplate>
         <JiraTemplate exact path="/miniproject" component={Miniproject}></JiraTemplate>
+        <JiraTemplate exact path="/minidesign" component={Minidesign}></JiraTemplate>
         <JiraTemplate exact path="/aboutme" component={Aboutme}></JiraTemplate>
+        <JiraTemplate exact path="/skill" component={MySkill}></JiraTemplate>
+        <JiraTemplate exact path="/contact" component={ContactMe}></JiraTemplate>
         <JiraTemplate exact path="/projectdetail/:projectId" component={IndexJira}></JiraTemplate>
         <UserLoginTemplate exact path="/" component={LoginJira}></UserLoginTemplate>
         {/* tránh người dùng gõ bậy bạ trên URL, khi URL ko hợp lý thì sẽ trả về trang PageNotFound */}

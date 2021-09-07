@@ -21,35 +21,38 @@ function CreateProject(props) {
     handleChange,
     handleBlur,
     handleSubmit,
-    setFieldValue,
+    setFieldValue
   } = props; //props này của Formik
 
   //setValues của formik là set HẾT lại các giá trị value thành obj mà ko cần phải thông qua hàm handleChange, nó có thể dùng ở bất kì hàm nào trong component này, do handleEditorChange ko phải của formik nên ban đầu ta ko truy cập để lấy description dc
 
-
   useEffect(() => {
     //gọi api lấy dữ liệu thẻ select bên dưới
     dispatch({
-      type: "GET_ALL_PROJECT_CATEGORY_SAGA",
+      type: "GET_ALL_PROJECT_CATEGORY_SAGA"
     });
   }, []);
 
   const handleEditorChange = (content, editor) => {
-  //setFieldValues của formik là set giá trị value mà ko cần phải thông qua hàm handleChange, nó có thể dùng ở bất kì hàm nào trong component này, do handleEditorChange ko phải của formik nên ban đầu ta ko truy cập để lấy description dc
-  setFieldValue("description", content); //description đóng vai trò là key và content là value
+    //setFieldValues của formik là set giá trị value mà ko cần phải thông qua hàm handleChange, nó có thể dùng ở bất kì hàm nào trong component này, do handleEditorChange ko phải của formik nên ban đầu ta ko truy cập để lấy description dc
+    setFieldValue("description", content); //description đóng vai trò là key và content là value
   };
 
   return (
-    <div className="container m-5">
-      <h3>Create Project</h3>
+    <div className="container  ml-auto mr-auto mt-md-5 mb-md-5 bg-glass">
       <form
         className="container"
         onSubmit={handleSubmit}
         onChange={handleChange}
       >
+        <h3 className="mt-3">Create Project</h3>
         <div className="form-group">
           <p>Name</p>
-          <input className="form-control" name="projectName"></input>
+          <input
+            className="form-control"
+            name="projectName"
+            placeholder="Enter your project name"
+          ></input>
         </div>
         <div className="form-group">
           <p>Description</p>
@@ -61,7 +64,7 @@ function CreateProject(props) {
               plugins: [
                 "advlist autolink lists link image charmap print preview anchor",
                 "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table paste code help wordcount",
+                "insertdatetime media table paste code help wordcount"
               ],
               toolbar:
                 "undo redo | formatselect | " +
@@ -69,7 +72,7 @@ function CreateProject(props) {
                 "alignright alignjustify | bullist numlist outdent indent | " +
                 "removeformat | help",
               content_style:
-                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
             }}
             onEditorChange={handleEditorChange}
           />
@@ -82,7 +85,6 @@ function CreateProject(props) {
             onChange={handleChange}
           >
             {arrProjectCategory.map((item, index) => {
-
               return (
                 <option value={item.id} key={index}>
                   {item.projectCategoryName}
@@ -91,7 +93,7 @@ function CreateProject(props) {
             })}
           </select>
         </div>
-        <button className="btn btn-primary" type="submit">
+        <button className="btn btn-create" type="submit">
           Create Project
         </button>
       </form>
@@ -111,7 +113,7 @@ const createProjectForm = withFormik({
     return {
       projectName: "",
       description: "",
-      categoryId: props.arrProjectCategory[0]?.id, //giúp lấy giá trị mặc định ban đầu cho select khi render từ map. Ta dùng dấu ? vì dữ liệu ban đầu của arrProjectCategory là rỗng và id chưa có giá trị nên báo lỗi
+      categoryId: props.arrProjectCategory[0]?.id //giúp lấy giá trị mặc định ban đầu cho select khi render từ map. Ta dùng dấu ? vì dữ liệu ban đầu của arrProjectCategory là rỗng và id chưa có giá trị nên báo lỗi
     };
   },
 
@@ -121,24 +123,22 @@ const createProjectForm = withFormik({
   //hàm này lấy dữ liệu từ form sau khi ta submit
   //props từ redux sẽ dc nhận ở đây
   handleSubmit: (values, { props, setSubmitting }) => {
-    console.log('value',values); //values này là 1 obj chứa các giá trị return của mapproptostate
+    console.log("value", values); //values này là 1 obj chứa các giá trị return của mapproptostate
     console.log(props);
-
 
     props.dispatch({
       type: CREATE_PROJECT_SAGA,
-      newProject: values,
-    })
-
+      newProject: values
+    });
   },
   //displayName dùng để phân biệt các formik với nhau
-  displayName: "CreateProjectFormik",
+  displayName: "CreateProjectFormik"
 })(CreateProject);
 
 //mapstatetoprops lấy state từ reducer
 const mapStateToProps = (state) => {
   return {
-    arrProjectCategory: state.ProjectCategoryReducer.arrProjectCategory,
+    arrProjectCategory: state.ProjectCategoryReducer.arrProjectCategory
   };
 };
 

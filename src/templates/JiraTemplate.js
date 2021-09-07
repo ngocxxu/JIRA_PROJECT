@@ -21,8 +21,6 @@ export const JiraTemplate = (props) => {
             <div>
               {/* BODY */}
               <div className="jira">
-                {/* Sider Bar  */}
-                <SidebarJira></SidebarJira>
                 {/* Menu */}
                 <MenuJira></MenuJira>
                 {/* {/* {/* Main Board * /} * /} */}

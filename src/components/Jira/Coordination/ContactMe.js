@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Minigame(props) {
+export default function ContactMe(props) {
   return (
     <div>
       

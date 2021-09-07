@@ -44,6 +44,7 @@ function ModalJira(props) {
   const { arrTaskType } = useSelector((state) => state.TaskTypeReducer);
   const { projectDetail } = useSelector((state) => state.ProjectReducer);
   const { lstComment } = useSelector((state) => state.CommentReducer);
+  const userLogin = useSelector((state) => state.UserJiraReducer.userLogin);
 
   const [visibleEditor, setVisibleEditor] = useState(false);
   const [visibleComment, setVisibleComment] = useState(false);
@@ -70,15 +71,10 @@ function ModalJira(props) {
     });
 
     // gọi api cho Comment
-    setTimeout(
-      () =>{
-        console.log('taskDetailModal.taskId settimeout',taskDetailModal.taskId)
-        dispatch({
-          type: GET_ALL_COMMENT_SAGA,
-          taskIdCmt: taskDetailModal.taskId
-        })},
-      5000
-    );
+    dispatch({
+      type: GET_ALL_COMMENT_SAGA,
+      taskIdCmt: taskDetailModal.taskId
+    });
     // gọi api cho Comment
     // dispatch({
     //   type: GET_ALL_COMMENT_SAGA,
@@ -403,7 +399,7 @@ function ModalJira(props) {
                     <h6>Comment</h6>
                     <div className="block-comment" style={{ display: "flex" }}>
                       <div className="avatar">
-                        <img src={logo} alt={logo} />
+                        <img src={userLogin?.avatar} alt={userLogin?.avatar} />
                       </div>
                       <form onSubmit={handleSubmit} className="input-comment">
                         <input

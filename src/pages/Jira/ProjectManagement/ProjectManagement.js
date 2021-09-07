@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Table,
   Button,
@@ -6,18 +6,18 @@ import {
   Popover,
   Avatar,
   Image,
-  AutoComplete,
+  AutoComplete
 } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import {
   CheckCircleOutlined,
   DeleteOutlined,
-  EditOutlined,
+  EditOutlined
 } from "@ant-design/icons";
 import {
   CREATE_PROJECT_SAGA,
   GET_LIST_PROJECT,
-  GET_LIST_PROJECT_SAGA,
+  GET_LIST_PROJECT_SAGA
 } from "../../../redux/constants/Jira/JiraConst";
 import { Popconfirm, message } from "antd";
 
@@ -28,10 +28,11 @@ import { Tag, Divider } from "antd";
 import {
   CLOSE_DRAWER,
   OPEN_DRAWER,
-  OPEN_FORM_EDIT_PROJECT,
+  OPEN_FORM_EDIT_PROJECT
 } from "../../../redux/constants/Jira/DrawerConst";
 import FormEditProject from "../../../components/Forms/FormEditProject/FormEditProject";
 import { NavLink } from "react-router-dom";
+import FormCreateTask from "../../../components/Forms/FormCreateTask/FormCreateTask";
 
 //hàm thông báo delete
 // const confirm = (e) => {
@@ -52,7 +53,7 @@ const data = [
     categoryId: 1,
     categoryName: "Dự án web",
     alias: "bono",
-    deleted: false,
+    deleted: false
   },
   {
     id: 1029,
@@ -61,8 +62,8 @@ const data = [
     categoryId: 1,
     categoryName: "Dự án web",
     alias: "bono",
-    deleted: false,
-  },
+    deleted: false
+  }
 ];
 
 export default function ProjectManagement(props) {
@@ -70,14 +71,13 @@ export default function ProjectManagement(props) {
   const { userSearch } = useSelector((state) => state.UserJiraReducer);
   const [state, setState] = useState({
     filteredInfo: null,
-    sortedInfo: null,
+    sortedInfo: null
   });
 
   const [value, setValue] = useState("");
 
-  //hàm search 
+  //hàm search
   const searchRef = useRef(null);
-  
 
   const projectList = useSelector(
     (state) => state.ProjectJiraReducer.projectList
@@ -85,7 +85,7 @@ export default function ProjectManagement(props) {
 
   useEffect(() => {
     dispatch({
-      type: GET_LIST_PROJECT_SAGA,
+      type: GET_LIST_PROJECT_SAGA
     });
   }, []);
 
@@ -93,14 +93,14 @@ export default function ProjectManagement(props) {
     console.log("Various parameters", pagination, filters, sorter);
     setState({
       filteredInfo: filters,
-      sortedInfo: sorter,
+      sortedInfo: sorter
     });
   };
 
   const clearAll = () => {
     setState({
       filteredInfo: null,
-      sortedInfo: null,
+      sortedInfo: null
     });
   };
 
@@ -108,8 +108,8 @@ export default function ProjectManagement(props) {
     setState({
       sortedInfo: {
         order: "descend",
-        columnKey: "age",
-      },
+        columnKey: "age"
+      }
     });
   };
 
@@ -128,16 +128,16 @@ export default function ProjectManagement(props) {
       key: "id", //key là thuộc tính
       sorter: (item2, item1) => {
         return item2.id - item1.id;
-      },
+      }
       // sortDirections: ['descend'],
     },
     {
       title: "Project Name",
       dataIndex: "projectName",
       key: "projectName",
-      render:(text,record, index)=>{
+      render: (text, record, index) => {
         // console.log('projectList123',projectList);
-        return <NavLink to={`/projectdetail/${record.id}`}>{text}</NavLink> //text ở đây chứa project name
+        return <NavLink to={`/projectdetail/${record.id}`}>{text}</NavLink>; //text ở đây chứa project name
       },
       //sort theo kí tự abc
       sorter: (item2, item1) => {
@@ -149,7 +149,7 @@ export default function ProjectManagement(props) {
         } else {
           return 1;
         }
-      },
+      }
     },
     // {
     //   title: "Description",
@@ -178,7 +178,7 @@ export default function ProjectManagement(props) {
         } else {
           return 1;
         }
-      },
+      }
     },
     {
       title: "Creator",
@@ -198,7 +198,7 @@ export default function ProjectManagement(props) {
         } else {
           return 1;
         }
-      },
+      }
     },
     {
       title: "Member",
@@ -212,7 +212,7 @@ export default function ProjectManagement(props) {
             {record.members?.slice(0, 3).map((member, index) => {
               return (
                 <Popover
-                key={index}
+                  key={index}
                   placement="top"
                   title={"Member"}
                   content={() => {
@@ -247,8 +247,8 @@ export default function ProjectManagement(props) {
                                         type: "REMOVE_USER_PROJECT_SAGA",
                                         userProject: {
                                           projectId: record.id,
-                                          userId: mem.userId,
-                                        },
+                                          userId: mem.userId
+                                        }
                                       });
                                     }}
                                     className="btn btn-danger"
@@ -264,7 +264,11 @@ export default function ProjectManagement(props) {
                     );
                   }}
                 >
-                  <Avatar key={index} src={member.avatar} alt={member.avatar}></Avatar>
+                  <Avatar
+                    key={index}
+                    src={member.avatar}
+                    alt={member.avatar}
+                  ></Avatar>
                 </Popover>
               );
             })}
@@ -280,7 +284,7 @@ export default function ProjectManagement(props) {
                     options={userSearch?.map((user, index) => {
                       return {
                         label: user.name,
-                        value: user.userId.toString(),
+                        value: user.userId.toString()
                       };
                     })}
                     value={value} //value của antd nhận vào state value dc đặt ở hàm useState phía trên
@@ -303,8 +307,8 @@ export default function ProjectManagement(props) {
                         type: "ADD_USER_PROJECT_API",
                         userProject: {
                           projectId: record.id,
-                          userId: valueSelect,
-                        },
+                          userId: valueSelect
+                        }
                       });
                     }}
                     // options={options}  //option gợi ý, lấy từ api về
@@ -314,7 +318,7 @@ export default function ProjectManagement(props) {
                     //onSearch mỗi lần search sẽ call api về
                     onSearch={(value) => {
                       //nếu giá trị value trong trường search mà true, tất là có kí tự search thì ta cleartimeout
-                      if(searchRef.current){
+                      if (searchRef.current) {
                         clearTimeout(searchRef.current);
                       }
                       //khi ta search, thì các kí tự xuất hiện sẽ bị delay khi gọi lên api để tránh api bị overload và tràn ram
@@ -322,10 +326,9 @@ export default function ProjectManagement(props) {
                       searchRef.current = setTimeout(() => {
                         dispatch({
                           type: "GET_USER_API",
-                          keyWord: value,
+                          keyWord: value
                         });
-                        },300)
-
+                      }, 300);
                     }}
                   />
                 );
@@ -336,7 +339,7 @@ export default function ProjectManagement(props) {
             </Popover>
           </div>
         );
-      },
+      }
     },
 
     {
@@ -355,14 +358,14 @@ export default function ProjectManagement(props) {
                 dispatch({
                   type: OPEN_FORM_EDIT_PROJECT,
                   visible: true,
-                  title: 'Edit Project',
-                  Component: <FormEditProject></FormEditProject>,
+                  title: "Edit Project",
+                  Component: <FormEditProject></FormEditProject>
                 });
 
                 //dispatch dữ liệu của các dòng nội dùng trong bảng ProjectManagement hiện tại lên reducer
                 dispatch({
                   type: "EDIT_PROJECT",
-                  projectEditModal: record, //record chứa obj của values
+                  projectEditModal: record //record chứa obj của values
                 });
               }}
             >
@@ -375,7 +378,7 @@ export default function ProjectManagement(props) {
               onConfirm={() => {
                 dispatch({
                   type: "DELETE_PROJECT_SAGA",
-                  idProject: record.id,
+                  idProject: record.id
                 });
               }}
               okText="Yes"
@@ -388,8 +391,8 @@ export default function ProjectManagement(props) {
             ,
           </div>
         );
-      },
-    },
+      }
+    }
     // {
     //   title: "alias",
     //   dataIndex: "alias",
@@ -403,15 +406,24 @@ export default function ProjectManagement(props) {
   ];
 
   return (
-    <div className="container">
-      <h3 className="mt-3">Project Management</h3>
-      <Space style={{ marginBottom: 16 }}>
-        <Button onClick={setAgeSort}>Sort age</Button>
-        <Button onClick={clearFilters}>Clear filters</Button>
-        <Button onClick={clearAll}>Clear filters and sorters</Button>
-      </Space>
+    <div className="container mt-2 mb-2 bg-glass">
+      <div className="d-flex justify-content-between">
+        <h3 className="mt-3">Project Management</h3>
+        <button
+          onClick={() => {
+            dispatch({
+              type: "OPEN_FORM_CREATE_TASK",
+              visible: true,
+              Component: <FormCreateTask></FormCreateTask>
+            });
+          }}
+          className="btn btn-task"
+        >
+          + Add Task
+        </button>
+      </div>
       <Table
-      className='bg-glass'
+        className="bg-glass"
         rowKey={"id"}
         columns={columns}
         dataSource={projectList}

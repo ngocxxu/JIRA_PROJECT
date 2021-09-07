@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 // import logo from "../../assets/img/download.jfif"
 import logo from "../../assets/img/logo.jpg";
 import { Button, notification } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import FormCreateTask from "../Forms/FormCreateTask/FormCreateTask";
 
 const openNotification = () => {
   notification.open({
@@ -19,6 +20,7 @@ const openNotification = () => {
 
 export default function MenuJira() {
   const userLogin = useSelector((state) => state.UserJiraReducer.userLogin);
+  const dispatch = useDispatch();
 
   return (
     <div className="menu bg-glass">
@@ -76,8 +78,6 @@ export default function MenuJira() {
             User Management
           </NavLink>
         </div>
-      </div>
-      <div className="feature">
         <div>
           <i class="fas fa-layer-group"></i>{" "}
           <NavLink
@@ -88,6 +88,8 @@ export default function MenuJira() {
             Coordination
           </NavLink>
         </div>
+      </div>
+      <div className="feature">
         <div>
           <i class="fas fa-project-diagram"></i>{" "}
           <NavLink
@@ -95,27 +97,37 @@ export default function MenuJira() {
             to="/miniproject"
             activeClassName="active btn-menu text-white"
           >
-            Mini Project
+            Mini Frontend Project
           </NavLink>
         </div>
         <div>
-          <i class="fas fa-gamepad"></i>{" "}
+          <i class="fas fa-drafting-compass"></i>{" "}
           <NavLink
-            className=" nav-text"
-            to="/minigame"
+            className="nav-text "
+            to="/minidesign"
             activeClassName="active btn-menu text-white"
           >
-            Mini Game
+            Mini Design Project
           </NavLink>
         </div>
         <div>
-          <i class="far fa-laugh-beam"></i>{" "}
+          <i className="far fa-laugh-beam" />
           <NavLink
             className="nav-text ml-1"
             to="/aboutme"
             activeClassName="active btn-menu text-white"
           >
             About Me
+          </NavLink>
+        </div>
+        <div>
+          <i class="fas fa-medal"></i>{" "}
+          <NavLink
+            className="nav-text ml-1"
+            to="/skill"
+            activeClassName="active btn-menu text-white"
+          >
+            My Skill
           </NavLink>
         </div>
       </div>

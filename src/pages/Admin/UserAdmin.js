@@ -178,8 +178,8 @@ export default function UserAdmin(props) {
   ];
 
   return (
-    <div className="container">
-      <h3>User Management</h3>
+    <div className="container bg-glass">
+      <h3 className="mt-1">User Management</h3>
       <div className="d-flex">
         <div className="form-group w-100">
           <input
