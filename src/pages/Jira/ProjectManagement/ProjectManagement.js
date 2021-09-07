@@ -408,7 +408,7 @@ export default function ProjectManagement(props) {
   return (
     <div className="container mt-2 mb-2 bg-glass">
       <div className="d-flex justify-content-between">
-        <h3 className="mt-3">Project Management</h3>
+        <h3 className="mt-3" style={{color: 'rgb(25 39 155 / 85%)'}}>Project Management</h3>
         <button
           onClick={() => {
             dispatch({

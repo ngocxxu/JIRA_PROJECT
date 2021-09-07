@@ -179,19 +179,7 @@ export default function UserAdmin(props) {
 
   return (
     <div className="container bg-glass">
-      <h3 className="mt-1">User Management</h3>
-      <div className="d-flex">
-        <div className="form-group w-100">
-          <input
-            placeholder="Search..."
-            name="search"
-            className="form-control"
-          ></input>
-        </div>
-        <div>
-          <button className="btn btn-warning">Search</button>
-        </div>
-      </div>
+      <h3 className="mt-md-3 mt-sm-1" style={{color: 'rgb(25 39 155 / 85%)'}}>User Management</h3>
       <Table
         className="bg-glass"
         rowKey={"id"}

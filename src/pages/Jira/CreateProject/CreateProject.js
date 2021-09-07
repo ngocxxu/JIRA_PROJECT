@@ -45,7 +45,7 @@ function CreateProject(props) {
         onSubmit={handleSubmit}
         onChange={handleChange}
       >
-        <h3 className="mt-3">Create Project</h3>
+        <h3 className="mt-3 " style={{color: 'rgb(25 39 155 / 85%)'}}>Create Project</h3>
         <div className="form-group">
           <p>Name</p>
           <input

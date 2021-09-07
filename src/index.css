@@ -297,13 +297,15 @@
   text-decoration: none;
 }
 
+.miniproject_right{
+  transition: all 0.5s ease;
+
+}
 
 .miniproject_right:hover {
   transition: all 0.5s ease-in-out;
   transform: translateY(-10px);
-
   box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-
 
 }
 
@@ -411,8 +413,8 @@
 /* Menu */
 .menu {
   height: 100vh;
-  width: 18%;
-  /* background-color: #f4f5f7; */
+  width: 170%;
+    /* background-color: #f4f5f7; */
 }
 
 .menu .account {
@@ -566,7 +568,6 @@
 }
 
 .main .content .card {
-  margin-right: 10px;
   /* backdrop-filter: blur(16px) saturate(180%); */
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 12px;
@@ -917,3 +918,110 @@
   left: 0;
   right: -55.8px;
 }
+
+
+.skill6{
+  --animate-delay: 6s;
+}
+.skill7{
+  --animate-delay: 7s;
+}
+.skill8{
+  --animate-delay: 8s;
+}
+
+
+@keyframes typing { from { width: 0; } }
+@keyframes blink-caret { 50% { border-color: transparent; } }
+
+.typing-name { 
+	font: bold 300% Consolas, Monaco, monospace;
+	border-right: .1em solid black;
+	width: 27rem; 
+	white-space: nowrap;
+	overflow: hidden;
+	animation: typing 7s steps(22, end),
+	blink-caret 0.5s step-end infinite alternate;
+}
+
+
+
+.cv-header h3, .cv-header h1{
+  color: rgb(33 43 120 / 85%);
+}
+
+.cv-body h5, .cv-body h3{
+  color: rgb(33 43 120 / 85%);
+}
+
+
+.skill h2, .skill h5{
+  color:rgb(11 159 139 / 85%);
+}
+
+.miniproject_right h5{
+  font-weight: 600;
+  color: rgb(13 128 188 / 85%);
+}
+
+.miniproject_right .card{
+  width: 18rem;
+}
+
+
+/* .navbar-button{
+  display: none;
+} */
+
+@media only screen and (min-width: 992px) {
+  .navbar-button{
+    display: none;
+  }
+  .menu{
+    display: block;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .menu{
+    display: none;
+  }
+  .navbar-button{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+}
+@media only screen and (max-width: 768px) {
+  .typing-name{
+    font-size: 2rem; 
+    width:20rem;
+  }
+  .timeline .event{
+    padding-top: 0px;
+  }
+.miniproject_right .card{
+  width: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.main .info .text{
+  text-align: initial;
+}
+.main .content .card{
+  width: 0rem;
+  margin: 1rem;
+}
+}
+
+@media only screen and (max-width: 576px) {
+
+}
+
+.main .content .card{
+  width: 21rem;
+  height: auto;
+
+}
+

@@ -9,9 +9,9 @@ import minidemo6 from "../../../assets/img/minidemo6.png";
 
 export default function Miniproject(props) {
   return (
-    <div className="container d-md-flex flex-wrap justify-content-center align-items-center">
+    <div className="container d-md-flex flex-wrap justify-content-center align-items-center animate__animated animate__fadeInRight">
       <div className="miniproject_right  m-md-4">
-        <div className="card bg-glass" style={{ width: "18rem" }}>
+        <div className="card bg-glass">
           <img className="card-img-top" src={minidemo1} alt="Card image cap" />
           <div className="card-body">
             <h5 className="card-title">To Do List</h5>
@@ -37,7 +37,7 @@ export default function Miniproject(props) {
         </div>
       </div>
       <div className="miniproject_right  m-md-4">
-        <div className="card bg-glass" style={{ width: "18rem" }}>
+        <div className="card bg-glass">
           <img className="card-img-top" src={minidemo2} alt="Card image cap" />
           <div className="card-body">
             <h5 className="card-title">Chinese Dice</h5>
@@ -63,7 +63,7 @@ export default function Miniproject(props) {
         </div>
       </div>
       <div className="miniproject_right  m-md-4">
-        <div className="card bg-glass" style={{ width: "18rem" }}>
+        <div className="card bg-glass">
           <img
             className="card-img-top mw-100"
             src={minidemo3}
@@ -93,7 +93,7 @@ export default function Miniproject(props) {
         </div>
       </div>
       <div className="miniproject_right  m-md-4">
-        <div className="card bg-glass" style={{ width: "18rem" }}>
+        <div className="card bg-glass">
           <img className="card-img-top" src={minidemo4} alt="Card image cap" />
           <div className="card-body">
             <h5 className="card-title">Industry</h5>
@@ -119,7 +119,7 @@ export default function Miniproject(props) {
         </div>
       </div>
       <div className="miniproject_right  m-md-4">
-        <div className="card bg-glass" style={{ width: "18rem" }}>
+        <div className="card bg-glass">
           <img className="card-img-top" src={minidemo5} alt="Card image cap" />
           <div className="card-body">
             <h5 className="card-title">Farming</h5>
@@ -145,7 +145,7 @@ export default function Miniproject(props) {
         </div>
       </div>
       <div className="miniproject_right  m-md-4">
-        <div className="card bg-glass" style={{ width: "18rem" }}>
+        <div className="card bg-glass">
           <img
             className="card-img-top mw-100"
             src={minidemo6}

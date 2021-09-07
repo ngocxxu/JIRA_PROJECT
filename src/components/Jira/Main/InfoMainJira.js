@@ -19,12 +19,12 @@ export default function InfoMainJira({ projectDetail, ...props }) {
     <>
       <div className="container mt-4 mb-4">
         <div className="row text-center" style={{justifyContent: 'space-evenly'}}>
-          <div className="col-5 bg-glass p-2">
-            <h5>Name Project</h5>
+          <div className="col-md-5 m-3 bg-glass p-md-2">
+            <h5 style={{color: 'rgb(25 39 155 / 85%)'}}>Name Project</h5>
             <p className="">{projectDetail.projectName}</p>
           </div>
-          <div className="col-5 bg-glass p-2">
-            <h5>Detail Description</h5>
+          <div className="col-md-5 m-3 bg-glass p-md-2">
+            <h5 style={{color: 'rgb(25 39 155 / 85%)'}}>Detail Description</h5>
             <div>
               {/* ReactHtmlParser dùng để parse ra các dữ liệu từ description khi ta sử
         dụng các công cụ của editor (tô màu chữ, chữ to, canh lề...) nó vẫn sẽ
@@ -34,10 +34,10 @@ export default function InfoMainJira({ projectDetail, ...props }) {
           </div>
         </div>
       </div>
-      <div className="info" style={{ display: "flex" }}>
+      <div className="info d-lg-flex justify-content-center align-content-center" >
         <div className="search-block">
-          <input className="search" />
-          <i className="fa fa-search" />
+          <input className="search ml-3" />
+          <i className="fa fa-search ml-2" />
         </div>
         <div className="avatar-group" style={{ display: "flex" }}>
           {renderAvatar()}

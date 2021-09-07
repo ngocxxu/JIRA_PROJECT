@@ -7,13 +7,13 @@ const CvImage = styled.div`
 `;
 const ImageMe = styled.img`
   border-radius: 50%;
-  border: 15px solid #fff;
+  border: 12px solid #f8f8f8;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 
 export default function Aboutme(props) {
   return (
-    <div className="container mt-2 mb-2 p-5 bg-white rounded">
+    <div className="container mt-2 mb-2 p-5 rounded bg-glass animate__animated animate__rotateInUpLeft">
       <div className="cv-header row">
         <div className="col-sm-12 col-md-4">
           <CvImage className="cv-img" style={{ width: "100%" }}>
@@ -22,12 +22,12 @@ export default function Aboutme(props) {
         </div>
         <div className="col-sm-12 col-md-8 d-flex flex-column justify-content-center">
           <h3>Frontend Developer</h3>
-          <h1>Hi, i'm Ngoc Quach</h1>
-          <p>
+          <h1 className="typing-name">Hi, i'm Ngoc Quach</h1>
+          <p style={{fontSize: '15px'}}>
             Previously I used to be a chemical engineering but due to both
             logical and creative passion for IT since I studied in middle
             school, I decided to go back to it. I have known the frontend and
-            feel interested in it because I want to bring the best completed
+            feel interested in it because I want to bring the best-completed
             products for customers and satisfy all the requirements from them.
           </p>
         </div>
@@ -36,12 +36,14 @@ export default function Aboutme(props) {
         <div className="cv-edu-exp mt-md-3 mt-sm-2">
           <div className="cv-edu">
             <div className="row">
-              <div className="col-md-12">
-                <div className="card">
+              <div className="">
+                <div className="card" style={{  backgroundColor: '#f8f8f8'}}>
                   <div className="card-body">
                     <div id="content" className="row">
                       <div className="col-md-6">
-                        <h5>Experience</h5>
+                        <h5 className='border-text'>
+                          Work Experiences
+                          </h5>
                         <ul className="timeline">
                           <li className="event">
                             <h3>Jun 2021 - Aug 2021</h3>
@@ -51,7 +53,7 @@ export default function Aboutme(props) {
                             <div>
                               - Building UI for landing page of website on client-side and server-side.
                               <br/>- Join in the realistic projects and daily meeting with team and customer.
-                              <br/>- Be learned and used such as pug, jquery, git, basic reactJS...
+                              <br/>- Be learned and useded such as pug, jquery, git, basic reactJS...
                             </div>
                           </li>
                           <li className="event">
@@ -62,7 +64,7 @@ export default function Aboutme(props) {
                         </ul>
                       </div>
                       <div className="col-md-6">
-                        <h5>Education</h5>
+                        <h5 className='border-text'>Education</h5>
                         <ul className="timeline">
                           <li className="event">
                             <h3>Apr 2021 - Studying</h3>

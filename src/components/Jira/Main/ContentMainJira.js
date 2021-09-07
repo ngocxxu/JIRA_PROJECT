@@ -8,6 +8,7 @@ import {
 } from "../../../redux/constants/Jira/TaskTypeConstant";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { GET_ALL_COMMENT_SAGA } from "../../../redux/constants/Jira/CommentConst";
+import { ReactComponent as Tap } from "../../../assets/icon/tap.svg";
 
 export default function ContentMainJira({ projectDetail, ...props }) {
   const dispatch = useDispatch();
@@ -52,8 +53,8 @@ export default function ContentMainJira({ projectDetail, ...props }) {
               {(provided) => {
                 return (
                   <div
-                    className="card"
-                    style={{ width: "17rem", height: "auto" }}
+                    className="card mr-md-2"
+                    
                   >
                     <div className="card-header">
                       {tastListDetail.statusName}
@@ -92,7 +93,13 @@ export default function ContentMainJira({ projectDetail, ...props }) {
                                   data-toggle="modal"
                                   data-target="#infoModal"
                                 >
-                                  <p>{task.taskName}</p>
+                                  <div className="d-flex justify-content-between">
+                                    <p>{task.taskName}</p>
+                                    <div>
+                                      <Tap className="m-1"></Tap>
+                                    </div>
+                                  </div>
+
                                   <div
                                     className="block"
                                     style={{ display: "flex" }}
@@ -139,33 +146,9 @@ export default function ContentMainJira({ projectDetail, ...props }) {
   };
 
   return (
-    <div className="content" style={{ display: "flex" }}>
+    <div className="content d-lg-flex" >
       {renderCardTaskList()}
     </div>
   );
 }
 
-{
-  /* <div className="card" style={{ width: "17rem", height: "25rem" }}>
-<div className="card-header">SELECTED FOR DEVELOPMENT 2</div>
-<ul className="list-group list-group-flush">
-  <li className="list-group-item">Cras justo odio</li>
-  <li className="list-group-item">Dapibus ac facilisis in</li>
-</ul>
-</div>
-<div className="card" style={{ width: "17rem", height: "25rem" }}>
-<div className="card-header">IN PROGRESS 2</div>
-<ul className="list-group list-group-flush">
-  <li className="list-group-item">Cras justo odio</li>
-  <li className="list-group-item">Dapibus ac facilisis in</li>
-</ul>
-</div>
-<div className="card" style={{ width: "17rem", height: "25rem" }}>
-<div className="card-header">DONE 3</div>
-<ul className="list-group list-group-flush">
-  <li className="list-group-item">Cras justo odio</li>
-  <li className="list-group-item">Dapibus ac facilisis in</li>
-  <li className="list-group-item">Vestibulum at eros</li>
-</ul>
-</div> */
-}
