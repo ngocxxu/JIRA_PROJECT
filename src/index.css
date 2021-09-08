@@ -93,7 +93,7 @@
   margin: 10px;
   padding: 15px 45px;
   text-align: center;
-  text-transform: uppercase;
+  
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -120,7 +120,7 @@
   margin: 10px;
   padding: 15px 45px;
   text-align: center;
-  text-transform: uppercase;
+  
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -146,7 +146,7 @@
 .btn-grad {
   padding: 15px 45px;
   text-align: center;
-  text-transform: uppercase;
+  
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -172,7 +172,7 @@
 .btn-menu {
   padding: 5px;
   text-align: center;
-  text-transform: uppercase;
+  
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -232,7 +232,7 @@
 .btn-create {
   padding: 15px 45px;
   text-align: center;
-  text-transform: uppercase;
+  
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -257,7 +257,7 @@
 }
 .btn-card {
   text-align: center;
-  text-transform: uppercase;
+  
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -282,7 +282,7 @@
 }
 .btn-card-1 {
   text-align: center;
-  text-transform: uppercase;
+  
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -413,14 +413,17 @@
 /* Menu */
 .menu {
   height: 100vh;
-  width: 170%;
+  width: 112%;
+  position: relative;
+  z-index: 10;
     /* background-color: #f4f5f7; */
 }
 
 .menu .account {
   display: flex;
-  padding: 5% 17%;
-  margin-bottom: 5%;
+  /* padding: 5% 17%; */
+  margin-bottom: 2%;
+  margin-left: 7%;
 }
 
 .menu .account .avatar {
@@ -436,6 +439,7 @@
   padding-top: 12%;
   padding-bottom: 5%;
   text-align: left;
+  margin-top: 5px;
 }
 
 .menu .account .account-info p:first-child {
@@ -449,12 +453,12 @@
 }
 
 .menu .control {
-  padding: 0% 10%;
+  /* padding: 0% 10%; */
   text-align: left;
   margin-bottom: 8%;
   border-bottom: 2px solid #c4c5c6;
   margin-left: 7%;
-  margin-right: 7%;
+  /* margin-right: 7%; */
 }
 
 .menu .control div {
@@ -476,11 +480,11 @@
 }
 
 .menu .feature {
-  padding: 0% 10%;
+  /* padding: 0% 10%; */
   text-align: left;
   margin-bottom: 8%;
   margin-left: 7%;
-  margin-right: 7%;
+  /* margin-right: 7%; */
 }
 
 .menu .feature div {
@@ -973,16 +977,16 @@
   display: none;
 } */
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1200px) {
   .button-query{
     opacity: 0;
   }
-  .menu{
+  .menu,.button-big-query{
     display: block;
   }
 }
-@media only screen and (max-width: 992px) {
-  .menu{
+@media only screen and (max-width: 1200px) {
+  .menu,.button-big-query{
     display: none;
   }
   .button-query{
@@ -1038,6 +1042,7 @@
 
 }
 
+
 .menu-color-toggle{
   color:hsla(7, 73%, 63%, 1);
 }
@@ -1049,4 +1054,15 @@
 .svg-icon:hover{
   transition: all 0.5s ease;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.button-big-query{
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+}
+
+.svg-menu{
+  fill: #b42547;
 }

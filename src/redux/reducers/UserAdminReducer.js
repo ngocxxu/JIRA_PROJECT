@@ -11,18 +11,11 @@ import {
 const stateDefault = {
   arrUserAdmin: [
     {
-      userId: 6,
-      name: "khai truong",
-      avatar: "https://ui-avatars.com/api/?name=khai truong",
-      email: "cyberlearn123@gmail.com",
-      phoneNumber: "0905807494"
-    },
-    {
       userId: 81,
-      name: "NKTdsfdsfsdfdsfsd",
+      name: "Nino",
       avatar: "https://ui-avatars.com/api/?name=NKTdsfdsfsdfdsfsd",
-      email: "kt.nguyen6789@gmail.com",
-      phoneNumber: "0906574387sdfsdfsdfsd"
+      email: "123@gmail.com",
+      phoneNumber: "123456"
     }
   ],
   userEdit: {

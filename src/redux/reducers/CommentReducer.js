@@ -42,7 +42,8 @@ const initialState = {
     id: 1
   },
   //button toggle navmenu
-  toggleMenu: false
+  toggleMenu: false,
+  toggleMenuBig: true,
 };
 
 export const CommentReducer = (state = initialState, action) => {
@@ -55,6 +56,9 @@ export const CommentReducer = (state = initialState, action) => {
 
     case 'TOGGLE_MENU':
       return { ...state, toggleMenu: action.toggleBar}
+
+    case 'TOGGLE_MENU_BIG':
+      return { ...state, toggleMenuBig: action.toggleBarBig}
     default:
       return state;
   }

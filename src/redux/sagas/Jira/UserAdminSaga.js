@@ -59,7 +59,7 @@ function* userSignUpSaga(action) {
     if (status === STATUS_CODE.SUCCESS) {
       console.log("userSignUpSaga", data);
       notificationFunction("success", "Register is successful");
-      history.push("/projectmanagement");
+      history.push("/login");
     }
   } catch (error) {
     console.log("error", error.response?.data);
