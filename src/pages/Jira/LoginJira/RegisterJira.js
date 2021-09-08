@@ -40,7 +40,7 @@ export default function RegisterJira(props) {
     },
     validationSchema: Yup.object().shape({
       name: Yup.string()
-      .required("Name can not be empty!").matches(/^[A-Za-z]+$/, 'Name can not a number'),
+      .required("Name can not be empty!"),
       passWord: Yup.string()
         .required("Password can not be empty!")
         .min(6, "Password must be at least 6 characters")
