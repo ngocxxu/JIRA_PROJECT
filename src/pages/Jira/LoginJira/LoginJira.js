@@ -121,7 +121,7 @@ function LoginJira(props) {
             <div>
               <a
                 className="text-decoration-none"
-                href="https://www.facebook.com/ngocquach97/"
+                href="#"
               >
                 <Button
                   className="hover-facebook"

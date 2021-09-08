@@ -24,13 +24,21 @@ import {
   DELETE_USER_ADMIN_SAGA,
   EDIT_USER_ADMIN_MODAL,
   GET_USER_ADMIN_SAGA,
-  OPEN_FORM_EDIT_USER_ADMIN
+  GET_USER_SEARCH_ADMIN_SAGA,
+  OPEN_FORM_EDIT_USER_ADMIN,
+  SEARCH_USER_ADMIN,
 } from "../../redux/constants/Jira/UserFormConst";
 import FormEditUserAdmin from "../../components/Forms/FormEditUserAdmin/FormEditUserAdmin";
 
 export default function UserAdmin(props) {
   const dispatch = useDispatch();
   const { arrUserAdmin } = useSelector((state) => state.UserAdminReducer);
+  const { userSearchAdmin } = useSelector((state) => state.UserAdminReducer);
+  const [value, setValue] = useState("");
+
+  //hàm search
+  const searchRef = useRef(null);
+
   const [state, setState] = useState({
     filteredInfo: null,
     sortedInfo: null
@@ -43,6 +51,12 @@ export default function UserAdmin(props) {
       sortedInfo: sorter
     });
   };
+
+  const mockVal = (str, repeat = 1) => ({
+    value: str.repeat(repeat),
+  });
+
+  const [options, setOptions] = useState([]);
 
   useEffect(() => {
     dispatch({
@@ -179,7 +193,60 @@ export default function UserAdmin(props) {
 
   return (
     <div className="container bg-glass">
-      <h3 className="mt-md-3 mt-sm-1" style={{color: 'rgb(25 39 155 / 85%)'}}>User Management</h3>
+      <h3 className="mt-md-3 mt-sm-1" style={{ color: "rgb(25 39 155 / 85%)" }}>
+        User Management
+      </h3>
+      <AutoComplete className="mb-2"
+        //thuộc tính option của andt dùng khi ta search 1 chữ nào đó thì xuất hiện bảng popup search như google
+        //vì options của antd chỉ nhận vào {label, value} và trong mảng userSearch ta ko chứa 2 thuộc tính đó nên ta phải biến đổi như sau
+        options={arrUserAdmin?.map((user, index) => {
+          return {
+            label: user.name,
+            value: user.userId.toString()
+          };
+        })}
+        value={value} //value của antd nhận vào state value dc đặt ở hàm useState phía trên
+        //text là giá trị mà ng dùng đang gõ trog trường input
+        //do lifecycle, sau khi onSelect kích hoạt setValue thì component dc render lại, làm ta ko thể xóa dc kí tự
+        //do đó ta phải dùng onChange để overwrite lại onSelect
+        onChange={(valueSelect) => {
+          setValue(valueSelect);
+        }}
+        //onSelect để chọn member dựa vào user.userId
+        onSelect={(valueSelect, options) => {
+          // console.log(valueSelect); //chứa giá trị user.userId
+          // console.log(options); //chứa obj đó là {label:user.name, value:user.userId}
+
+          //set giá trị hộp thoại input =` option.label
+          setValue(options.label);
+
+          // gửi lên redux
+          dispatch({
+            type: SEARCH_USER_ADMIN,
+            userSearch: valueSelect,
+          })
+        }}
+        // options={options}  //option gợi ý, lấy từ api về
+        style={{ width: 200 }}
+        placeholder="Search your username"
+        
+        //value là giá trị mình nhập vào trường input
+        // onSearch mỗi lần search sẽ call api về
+        onSearch={(value) => {
+          //nếu giá trị value trong trường search mà true, tất là có kí tự search thì ta cleartimeout
+          if (searchRef.current) {
+            clearTimeout(searchRef.current);
+          }
+          //khi ta search, thì các kí tự xuất hiện sẽ bị delay khi gọi lên api để tránh api bị overload và tràn ram
+          //kiểu như ta dùng settimeout để delay cho hàm GET_USER_API dispatch gọi api bên dưới
+          searchRef.current = setTimeout(() => {
+            dispatch({
+              type: GET_USER_ADMIN_SAGA,
+            });
+          }, 300);
+        }}
+      />
+
       <Table
         className="bg-glass"
         rowKey={"id"}

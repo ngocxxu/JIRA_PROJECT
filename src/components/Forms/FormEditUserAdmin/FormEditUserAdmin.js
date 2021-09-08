@@ -104,6 +104,9 @@ function FormEditUserAdmin(props) {
               name="passWord"
               onChange={handleChange}
             ></input>
+            <div className="text">
+              You can adjust the password of other users.
+            </div>
             {touched.passWord ? (
               <div className="text-danger">{errors.passWord}</div>
             ) : (

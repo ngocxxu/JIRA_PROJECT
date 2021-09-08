@@ -62,6 +62,7 @@ export function* rootSaga() {
     UserAdminSaga.theoDoiGetUserAdminSaga(),
     UserAdminSaga.theoDoiDeleteUserAdminSaga(),
     UserAdminSaga.theoDoiUpdateUserAdminSaga(),
+    // UserAdminSaga.theoDoiGetUserSearchAdminSaga(),
 
   ])
 

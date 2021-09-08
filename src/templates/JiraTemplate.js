@@ -20,13 +20,16 @@ export const JiraTemplate = (props) => {
           <Fragment>
             <div>
               {/* BODY */}
-              <div className="jira">
+              <div className="jira ">
                 {/* Menu */}
                 <MenuJira></MenuJira>
                 {/* {/* {/* Main Board * /} * /} */}
                 <props.component {...propsRoute} />
                 {/* Info Modal */}
                 <ModalJira></ModalJira>
+                <div className=" button-query">
+                  <i style={{fontSize:'50px'}} className="fas fa-caret-square-down"></i>
+                </div>
               </div>
             </div>
           </Fragment>

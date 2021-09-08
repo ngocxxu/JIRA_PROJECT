@@ -23,22 +23,9 @@ export default function MenuJira() {
   const dispatch = useDispatch();
 
   return (
-    <div className="">
-      <button
-        className="navbar-toggler navbar-button"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        style={{backgroundColor: 'red'}}
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
+    <div className="menu-query position-relative">
       <div
-        className="menu bg-glass  navbar-collapse"
-        id="navbarSupportedContent"
+        className="menu bg-glass"
       >
         <div className="account">
           <div className="avatar">
@@ -142,6 +129,96 @@ export default function MenuJira() {
               className="nav-text ml-1"
               to="/skill"
               activeClassName="active btn-menu text-white"
+            >
+              My Skills
+            </NavLink>
+          </div>
+        </div>
+      </div>
+      <div
+        className="menu-toggle bg-glass"
+      >
+        <div className="control">
+          <div>
+            <NavLink
+              onClick={openNotification}
+              className="nav-text ml-2"
+              to="/jira"
+              activeClassName="active"
+            >
+              Jira Board
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              className="nav-text ml-2"
+              to="/projectmanagement"
+              activeClassName="active menu-color-toggle"
+            >
+              Project Management
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              className="nav-text ml-2"
+              to="/createproject"
+              activeClassName="active menu-color-toggle"
+            >
+              Create Project
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              className="nav-text ml-2"
+              to="/usermanagement"
+              activeClassName="active menu-color-toggle"
+            >
+              User Management
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              className="nav-text ml-2"
+              to="/coordination"
+              activeClassName="active menu-color-toggle"
+            >
+              Coordination
+            </NavLink>
+          </div>
+        </div>
+        <div className="feature">
+          <div>
+            <NavLink
+              className="nav-text ml-2"
+              to="/miniproject"
+              activeClassName="active menu-color-toggle"
+            >
+              Mini Frontend Project
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              className="nav-text ml-2"
+              to="/minidesign"
+              activeClassName="active menu-color-toggle"
+            >
+              Mini Design Project
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              className="nav-text ml-2"
+              to="/aboutme"
+              activeClassName="active menu-color-toggle"
+            >
+              About Me
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              className="nav-text ml-2"
+              to="/skill"
+              activeClassName="active menu-color-toggle"
             >
               My Skills
             </NavLink>

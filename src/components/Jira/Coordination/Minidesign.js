@@ -9,7 +9,7 @@ import demo6 from "../../../assets/img/demo6.png";
 
 export default function Minidesign(props) {
   return (
-    <div className="container d-md-flex flex-wrap justify-content-center align-items-center animate__animated animate__fadeInRight">
+    <div className="container d-md-flex flex-wrap justify-content-center align-items-center animate__animated animate__fadeInUp">
       <div className="miniproject_right  m-md-4">
         <div className="card bg-glass">
           <img className="card-img-top" src={demo4} alt="Card image cap" />

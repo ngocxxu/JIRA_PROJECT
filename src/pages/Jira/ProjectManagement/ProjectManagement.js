@@ -257,11 +257,11 @@ export default function ProjectManagement(props) {
                                   </button>
                                 </td>
                               </tr>
-                            );
+                            )
                           })}
                         </tbody>
                       </table>
-                    );
+                    )
                   }}
                 >
                   <Avatar
@@ -388,7 +388,7 @@ export default function ProjectManagement(props) {
                 <DeleteOutlined />
               </button>
             </Popconfirm>
-            ,
+            
           </div>
         );
       }

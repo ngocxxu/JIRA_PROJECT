@@ -53,7 +53,7 @@ export default function Coordination(props) {
             <ItemSkill1>React DnD</ItemSkill1>
             <ItemSkill1>CSS Gradient</ItemSkill1>
             <ItemSkill1>Cybersoft Academy</ItemSkill1>
-            <ItemSkill1>Server Cybersoft</ItemSkill1>
+            <ItemSkill1>Cybersoft Server</ItemSkill1>
           </CoverItems2>
         </div>
       </div>

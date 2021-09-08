@@ -32,6 +32,8 @@ import {
   DELETE_USER_ADMIN_SAGA,
   GET_USER_ADMIN,
   GET_USER_ADMIN_SAGA,
+  GET_USER_SEARCH_ADMIN,
+  GET_USER_SEARCH_ADMIN_SAGA,
   UPDATE_USER_ADMIN,
   UPDATE_USER_ADMIN_SAGA,
   USER_SIGN_UP_SAGA
@@ -96,6 +98,30 @@ function* userUserAdminSaga(action) {
 export function* theoDoiGetUserAdminSaga() {
   yield takeLatest(GET_USER_ADMIN_SAGA, userUserAdminSaga);
 }
+
+//------get user SEARCH admin --------------------------------
+// function* userUserSearchAdminSaga(action) {
+//   try {
+//     //gọi api và nhận lại kết quả trả về từ api, rồi gán kết quả cho data, status
+//     const { data, status } = yield call(() =>
+//       userAdminService.getUserAdminAPI()
+//     );
+
+//     if (status === STATUS_CODE.SUCCESS) {
+//       // console.log('userUserAdminSagaSUCCESS',data);
+//       yield put({
+//         type: GET_USER_SEARCH_ADMIN,
+//         listUsersAdminSearch: data.content
+//       });
+//     }
+//   } catch (error) {
+//     console.log("error", error.response?.data);
+//   }
+// }
+
+// export function* theoDoiGetUserSearchAdminSaga() {
+//   yield takeLatest(GET_USER_SEARCH_ADMIN_SAGA, userUserSearchAdminSaga);
+// }
 
 //------delete user admin --------------------------------
 function* deleteUserAdminSaga(action) {
