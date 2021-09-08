@@ -32,7 +32,7 @@ reportWebVitals();
 $(document).ready(function(){
   $(".button-query").click(function(){
     $(".menu-query .menu-toggle").toggle();
-    $(".menu-toggle").css("opacity", "1");
+    // $(".menu-toggle").css("display", "block");
   });
 });
 
@@ -49,15 +49,38 @@ $(document).ready(function(){
 // });
 
 //remove AudioOnly word when resize
-$(document).ready(function () {
-  $(window).resize(function () {
-  if ($(window).width() < 992) {
-      $(".button-query").css("opacity", "1");
-    }  else{
-      $(".button-query").css("opacity", "0");
-      $(".menu-toggle").css("opacity", "0");
+// $(document).ready(function () {
+//   $(window).resize(function () {
+//     $(".button-query").click(function(){
+//       $(".menu-query .menu-toggle").toggle();
+//       // $(".menu-toggle").css("display", "block");
+//     });
+  
+//   if ($(window).width() < 992) {
+//       $(".button-query").css("opacity", "1");
+//     }  else{
+//       $(".button-query").css("opacity", "0");
+//       // $(".menu-toggle").css("display", "block");
 
-    }
-  });
-});
+//     }
+//   });
+// });
+
+// //remove icon cancel when page reload
+// $(document).ready(function () {
+//   $(window).width(function () {
+//     $(".button-query").click(function(){
+//       $(".menu-query .menu-toggle").toggle();
+//       // $(".menu-toggle").css("display", "block");
+//     });
+  
+//   if ($(window).width() < 992) {
+//       $(".button-query").css("opacity", "1");
+//     }  else{
+//       $(".button-query").css("opacity", "0");
+//       // $(".menu-toggle").css("display", "block");
+
+//     }
+//   });
+// });
 

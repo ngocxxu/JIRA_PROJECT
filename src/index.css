@@ -1034,7 +1034,7 @@
   z-index: 10;
   right: 0;
   top: 6%;
-  opacity: 0;
+  display:none;
 
 }
 
