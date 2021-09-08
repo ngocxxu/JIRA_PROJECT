@@ -24,7 +24,8 @@ export default function MenuJira() {
   const { toggleMenu } = useSelector((state) => state.CommentReducer);
   const { toggleMenuBig } = useSelector((state) => state.CommentReducer);
   return (
-    <div className=" position-relative">
+    <div className=" position-relative" style={{height: '100vh'}}>
+
       {toggleMenuBig ? (
         <div className="menu menu-big-toogle bg-glass">
           <div className="account mt-5">

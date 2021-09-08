@@ -1057,7 +1057,7 @@
 }
 
 .button-big-query{
-  position: fixed;
+  position: absolute;
   z-index: 10;
   left: 0;
   top: 0;
