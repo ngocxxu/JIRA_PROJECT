@@ -40,7 +40,9 @@ const initialState = {
   editComment: {
     contentComment: "",
     id: 1
-  }
+  },
+  //button toggle navmenu
+  toggleMenu: false
 };
 
 export const CommentReducer = (state = initialState, action) => {
@@ -51,6 +53,8 @@ export const CommentReducer = (state = initialState, action) => {
     case EDIT_COMMENT:
       return { ...state, lstComment: action.editComment };
 
+    case 'TOGGLE_MENU':
+      return { ...state, toggleMenu: action.toggleBar}
     default:
       return state;
   }

@@ -10,7 +10,7 @@ import store from "./redux/configstore";
 import "antd/dist/antd.css";
 import { BrowserRouter,Router } from "react-router-dom";
 import { history } from "./util/history";
-import $ from "jquery";
+// import $ from "jquery";
 
 ReactDOM.render(
   <Router history={history}>
@@ -29,12 +29,12 @@ ReactDOM.render(
 reportWebVitals();
 
 
-$(document).ready(function(){
-  $(".button-query").click(function(){
-    $(".menu-query .menu-toggle").toggle();
-    // $(".menu-toggle").css("display", "block");
-  });
-});
+// $(document).ready(function(){
+//   $(".button-query").click(function(){
+//     $(".menu-query .menu-toggle").toggle();
+//     // $(".menu-toggle").css("display", "block");
+//   });
+// });
 
 
 //remove icon cancel when page reload

@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import Header from "../components/Home/Header/Header";
 import ContentMainJira from "../components/Jira/Main/ContentMainJira";
@@ -11,6 +12,11 @@ import IndexJira from "../pages/Jira/ProjectDetail/IndexJira";
 // import '../index.css'
 
 export const JiraTemplate = (props) => {
+
+  const {toggleMenu} = useSelector(state => state.CommentReducer)
+
+
+  const dispatch = useDispatch()
   return (
     <Route
       exact
@@ -27,7 +33,12 @@ export const JiraTemplate = (props) => {
                 <props.component {...propsRoute} />
                 {/* Info Modal */}
                 <ModalJira></ModalJira>
-                <div className=" button-query">
+                <div onClick={()=>{
+                  dispatch({
+                    type: 'TOGGLE_MENU',
+                    toggleBar: !toggleMenu,
+                  })
+                }} className=" button-query">
                   <i style={{fontSize:'50px'}} className="fas fa-caret-square-down"></i>
                 </div>
               </div>

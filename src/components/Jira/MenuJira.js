@@ -21,7 +21,7 @@ const openNotification = () => {
 export default function MenuJira() {
   const userLogin = useSelector((state) => state.UserJiraReducer.userLogin);
   const dispatch = useDispatch();
-
+  const {toggleMenu} = useSelector(state => state.CommentReducer)
   return (
     <div className="menu-query position-relative">
       <div
@@ -135,7 +135,7 @@ export default function MenuJira() {
           </div>
         </div>
       </div>
-      <div
+      {toggleMenu ? <div
         className="menu-toggle bg-glass"
       >
         <div className="control">
@@ -225,6 +225,7 @@ export default function MenuJira() {
           </div>
         </div>
       </div>
+: ''}
     </div>
   );
 }
