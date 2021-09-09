@@ -363,10 +363,13 @@ function ModalJira(props) {
                 <div className="col-8">
                   <p className="issue">This is an issue of type: Task.</p>
                   <div className="description">
-                    <p>Description</p>
+                    <h3>Description</h3>
+                    <p className='text-danger'>
+                      (You can adjust the description by touch the content as below.)
+                    </p>
                     {renderDescription()}
                   </div>
-                  <div style={{ fontWeight: 500, marginBottom: 10 }}>
+                  <div className="mt-4" style={{ fontWeight: 500, marginBottom: 10 }}>
                     Jira Software (software projects) issue types:
                   </div>
                   <div className="title">
