@@ -184,7 +184,6 @@ export default function UserAdmin(props) {
                 <DeleteOutlined />
               </button>
             </Popconfirm>
-            ,
           </div>
         );
       }
