@@ -45,7 +45,7 @@ export default function MenuJira() {
               <i class="fas fa-chalkboard-teacher"></i>
               <NavLink
                 onClick={openNotification}
-                className="nav-text ml-2"
+                className="nav-text ml-1"
                 to="/jira"
                 activeClassName="active btn-menu"
               >
@@ -75,7 +75,7 @@ export default function MenuJira() {
             <div>
               <i class="fas fa-users-cog"></i>{" "}
               <NavLink
-                className="nav-text ml-1"
+                className="nav-text"
                 to="/usermanagement"
                 activeClassName="active btn-menu text-white"
               >
@@ -95,7 +95,7 @@ export default function MenuJira() {
           </div>
           <div className="feature">
             <div>
-              <i class="fas fa-project-diagram"></i>{" "}
+              <i class="fas fa-project-diagram mr-0"></i>{" "}
               <NavLink
                 className="nav-text "
                 to="/miniproject"
@@ -127,7 +127,7 @@ export default function MenuJira() {
             <div>
               <i class="fas fa-medal"></i>{" "}
               <NavLink
-                className="nav-text ml-1"
+                className="nav-text"
                 to="/skill"
                 activeClassName="active btn-menu text-white"
               >
