@@ -27,7 +27,6 @@ const IconFont = createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js"
 });
 
-
 export default function RegisterJira(props) {
   const dispatch = useDispatch();
 
@@ -39,23 +38,25 @@ export default function RegisterJira(props) {
       phoneNumber: ""
     },
     validationSchema: Yup.object().shape({
-      name: Yup.string()
-      .required("Name can not be empty!"),
+      name: Yup.string().required("Name can not be empty!"),
       passWord: Yup.string()
         .required("Password can not be empty!")
         .min(6, "Password must be at least 6 characters")
         .max(32, "Password must be at maximum 32 characters"),
-        email: Yup.string()
+      email: Yup.string()
         .required("Email can not be empty!")
         .email("Email is invalid!"),
-        phoneNumber: Yup.string().required("Phone number can not be empty!").min(6, "Phone number must be at least 6 characters").matches(/^[0-9]+$/, 'Phone number can not a character')
-      }),
+      phoneNumber: Yup.string()
+        .required("Phone number can not be empty!")
+        .min(6, "Phone number must be at least 6 characters")
+        .matches(/^[0-9]+$/, "Phone number can not a character")
+    }),
     onSubmit: (values) => {
       console.log("values", values);
       dispatch({
         type: USER_SIGN_UP_SAGA,
-        signUpForm: values,
-      })
+        signUpForm: values
+      });
     }
   });
 
@@ -65,10 +66,10 @@ export default function RegisterJira(props) {
         className="d-flex flex-column justify-content-center align-items-center"
         style={{ height: window.innerHeight }}
       >
-        <div style={{display: 'flex'}}>
+        <div style={{ display: "flex" }}>
           <button type="button" className="btn text-white btn-signup">
             <NavLink
-            className="text-white"
+              className="text-white"
               to="/login"
               // activeClassName="active-nav-item"
               // activeStyle={{ fontWeight: "bold" }}
@@ -77,7 +78,7 @@ export default function RegisterJira(props) {
             </NavLink>
           </button>
           <button type="button" className="btn text-white btn-signin">
-          <NavLink
+            <NavLink
               to="/register"
               className="text-white"
               // activeClassName="active-nav-item"
@@ -170,10 +171,7 @@ export default function RegisterJira(props) {
               </a>
             </div>
             <div>
-              <a
-                className="text-decoration-none"
-                href="#"
-              >
+              <a className="text-decoration-none" href="#">
                 <Button
                   className="hover-facebook"
                   type="ghost"
