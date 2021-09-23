@@ -77,7 +77,7 @@ export default function Aboutme(props) {
                           <li className="event">
                             <h3>Aug 2015 - Sep 2019</h3>
                             <div>Workplace: HOYA LENS VIETNAM LTD.</div>
-                            <div>Position: Quality Assurance.</div>
+                            <div>Position: Chemical Engineering.</div>
                           </li>
                         </ul>
                       </div>
